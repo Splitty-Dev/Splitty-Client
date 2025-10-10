@@ -55,3 +55,20 @@
     text-decoration: none;
   }
 }
+
+/* 기본 여백(모바일/데스크톱 공통) */
+:root {
+  --safe-top-base: 47px;
+  --safe-bottom-base: 34px;
+
+  --app-safe-top: var(--safe-top-base);
+  --app-safe-bottom: var(--safe-bottom-base);
+}
+
+/* 데스크톱 */
+@media (min-width: 768px) {
+  :root {
+    --safe-top-base: 24px;
+    --safe-bottom-base: 24px;
+  }
+}

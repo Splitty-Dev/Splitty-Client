@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { pretendard } from "./fonts";
 
@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={pretendard.variable}>
-      <body>{children}</body>
+      <body className="pt-[var(--app-safe-top)] pb-[var(--app-safe-bottom)]">
+        {children}
+      </body>
     </html>
   );
 }
