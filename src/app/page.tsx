@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>splity</div>;
+  return <div className="typo-b18">splity</div>;
 }

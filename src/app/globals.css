@@ -1,1 +1,57 @@
 @import "tailwindcss";
+
+@theme {
+  --font-pretendard: var(--font-pretendard), system-ui, -apple-system,
+    sans-serif;
+}
+
+@layer utilities {
+  /* b18: Pretendard / 700 / 18 / 28 */
+  .typo-b18 {
+    @apply font-pretendard font-bold text-[18px] leading-[28px];
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+
+  /* r16: Pretendard / 400 / 16 / 20 */
+  .typo-r16 {
+    @apply font-pretendard font-normal text-[16px] leading-[20px];
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+
+  /* b14: Pretendard / 700 / 14 / 18 */
+  .typo-b14 {
+    @apply font-pretendard font-bold text-[14px] leading-[18px];
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+
+  /* r14: Pretendard / 400 / 14 / 18 */
+  .typo-r14 {
+    @apply font-pretendard font-normal text-[14px] leading-[18px];
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+
+  /* b12: Pretendard / 700 / 12 / 16 */
+  .typo-b12 {
+    @apply font-pretendard font-bold text-[12px] leading-[16px];
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+
+  /* r12: Pretendard / 400 / 12 / 16 */
+  .typo-r12 {
+    @apply font-pretendard font-normal text-[12px] leading-[16px];
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+
+  /* r10: Pretendard / 400 / 10 / 14  */
+  .typo-r10 {
+    @apply font-pretendard font-normal text-[10px] leading-[14px];
+    letter-spacing: 0;
+    text-decoration: none;
+  }
+}
