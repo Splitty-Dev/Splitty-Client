@@ -10,6 +10,7 @@ export const mock = [
     totalNums: 5,
     //
     likes: 5,
+    // 카테고리 필요함
   },
   {
     id: 2,
