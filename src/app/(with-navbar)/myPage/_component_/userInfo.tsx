@@ -1,6 +1,6 @@
 import { myPageMockData } from "@/mocks/sampleprf";
 
-import rateIcon from "@/assets/icons/starIcon.svg";
+import rateIcon from "@/assets/icons/staricon.svg";
 import samplePrf from "@/assets/icons/samplePrf.svg";
 import Image from "next/image";
 
