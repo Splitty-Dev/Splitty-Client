@@ -11,6 +11,7 @@ import BackBtn from "../_component_/backBtn";
 import ItemBox from "../_component_/itemBox";
 import SellerInfo from "../_component_/seller-section";
 import ImgSection from "../_component_/img-section";
+import ProductDetailBottomSection from "../_component_/bottom-section";
 
 export default async function Page({
   params,
@@ -80,6 +81,10 @@ export default async function Page({
           })}
         </div>
       </section>
+      <ProductDetailBottomSection
+        price={sampleProduct.price}
+        rest={sampleProduct.totalNums - sampleProduct.currNums}
+      />
     </div>
   );
 }
