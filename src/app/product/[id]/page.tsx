@@ -1,73 +1,44 @@
 import Image from "next/image";
 import homeWhite from "@/assets/icons/homeWhite.svg";
-
-import rateIcon from "@/assets/icons/staricon.svg";
+import nextIcon from "@/assets/icons/product_next.svg";
 import personIcon from "@/assets/icons/product_person.svg";
 import locationIcon from "@/assets/icons/product_location.svg";
-import nextIcon from "@/assets/icons/product_next.svg";
 
 import { sampleProduct, sellingProducts } from "@/mocks/sampleProduct";
+
 import Link from "next/link";
 import BackBtn from "../_component_/backBtn";
 import ItemBox from "../_component_/itemBox";
+import SellerInfo from "../_component_/seller-section";
+import ImgSection from "../_component_/img-section";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string | string[] }>;
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
   console.log(id);
 
   return (
     <div className="-mt-[47px] typo-r12 relative mb-[80px]">
+      {/* 하단 고정 바 */}
       <div className="absolute top-[47px] left-4 z-11 flex gap-4">
         <BackBtn />
         <Link href={`/`}>
           <Image src={homeWhite} alt="home" width={20} height={20} />
         </Link>
       </div>
-      <section>
-        <div className="flex overflow-x-auto snap-mandatory snap-x scrollbar-hide w-full h-[385px] relative">
-          {sampleProduct.imageUrl.map((url, idx) => (
-            <Image
-              src={url}
-              alt={sampleProduct.title}
-              className="w-full h-[385px] object-cover"
-              key={idx}
-            />
-          ))}
-          <div className="shadow-[180deg_rgba(0,0,0,0.00)0%_rgba(0,0,0,0.40)100%] z-10 w-full absolute bottom-0">
-            shadow ---
-          </div>
-        </div>
-      </section>
+      {/* 사진영역 */}
+      <ImgSection
+        productTitle={sampleProduct.title}
+        imageUrls={sampleProduct.imageUrl}
+      />
+      {/* 정보영역 */}
       <section className="mx-4 ">
-        {/* 판매자 정보 */}
-        <div className="flex justify-between  py-4 border-b border-[#F2F2F2] ">
-          <div className="flex gap-2 items-center">
-            <Image
-              src={sampleProduct.sellerInfo.userPrf}
-              alt={sampleProduct.sellerInfo.userName}
-              width={40}
-              height={40}
-            />
-            <div className=" flex flex-col gap-1">
-              <h4 className="typo-b14">{sampleProduct.sellerInfo.userName}</h4>
-              <p className="text-[#4F4F4F]">
-                {sampleProduct.sellerInfo.location}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col items-end">
-            <div className=" flex items-center text-[#4F4DF8] typo-b14">
-              <span>{sampleProduct.sellerInfo.rating}</span>
-              <Image src={rateIcon} alt="rate" />
-            </div>
-            <p className="typo-r10 text-[#8C8C8C]">신뢰도</p>
-          </div>
-        </div>
-        {/* 상세정보 */}
+        {/* 1- 판매자 정보 */}
+        <SellerInfo info={sampleProduct.sellerInfo} />
+        {/* 2- 상세정보 */}
         <div className="py-4 gap-4 flex flex-col border-b border-[#F2F2F2]  ">
           <div className="flex flex-col gap-1">
             <h2 className="typo-b18">{sampleProduct.title}</h2>
@@ -87,6 +58,7 @@ export default async function Page({
           <div className="text-[#8C8C8C]">{`관심 ${sampleProduct.likes} · 조회 311`}</div>
         </div>
       </section>
+      {/* 판매상품 목록*/}
       <section className="mx-4 py-4 gap-4 flex flex-col">
         <div className="flex justify-between items-center">
           <h3 className="typo-b14">

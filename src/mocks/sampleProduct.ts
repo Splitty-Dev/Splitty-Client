@@ -14,7 +14,6 @@ export const sampleProduct = {
 
   title: "에코 생수 500ml",
   description: "위치 협의 가능합니다. 빠른 연락 부탁드려요!",
-
   imageUrl: [sampleImg, sampleImg, sampleImg],
 
   //

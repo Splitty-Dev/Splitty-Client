@@ -17,7 +17,13 @@ export default function UserInfo() {
       <div className="flex flex-col items-end gap-[2px]">
         <div className="flex text-[#4F4DF8] typo-b14">
           {myPageMockData.rating}
-          <Image src={rateIcon} alt="rate" className="" />
+          <Image
+            src={rateIcon}
+            alt="rate"
+            className=""
+            width={16}
+            height={16}
+          />
         </div>
         <p className="text-[#8C8C8C] text-[10px]">신뢰도</p>
       </div>
