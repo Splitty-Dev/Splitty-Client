@@ -16,8 +16,10 @@ import sampleImg from "@/assets/imgs/sampleProduct.jpg";
 import Image from "next/image";
 import bagIcon from "@/assets/icons/bagIcon.svg";
 import likeIcon from "@/assets/icons/likeIcon.svg";
+import Link from "next/link";
 
 interface ProductItemProps {
+  id: number;
   title: string;
   location: string;
   people: number;
@@ -35,8 +37,9 @@ export default function ProductItem({
   className?: string;
 }) {
   return (
-    <div
-      className={`mx-4  py-4 flex gap-4 border-b border-[#F2F2F2] ${className}`}
+    <Link
+      href={`/product/${product.id}`}
+      className={`mx-4  py-4 flex gap-4 border-b border-[#F2F2F2] ${className} cursor-pointer`}
     >
       <Image
         src={sampleImg}
@@ -56,6 +59,6 @@ export default function ProductItem({
           {product.likes}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
