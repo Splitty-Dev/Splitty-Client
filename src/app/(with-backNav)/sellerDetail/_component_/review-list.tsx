@@ -8,7 +8,7 @@ export default function ReviewList() {
       <h2 className="typo-b12 ">받은 거래후기</h2>
       {sampleReview.map((r, index) => (
         <div key={index} className="flex gap-3">
-          <Image src={samplePrf} alt={r.reviewerName} />
+          <Image src={samplePrf} alt={r.reviewerName} width={40} height={40} />
           <div className="flex flex-col ">
             <div className="flex items-center gap-1">
               <p className="typo-b12">{r.reviewerName}</p>

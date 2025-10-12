@@ -64,7 +64,9 @@ export default async function Page({
           <h3 className="typo-b14">
             {sampleProduct.sellerInfo.userName}님의 판매 상품
           </h3>
-          <Image src={nextIcon} alt="더보기" width={12} height={12} />
+          <Link href={`/sellerDetail/${sampleProduct.sellerInfo.userId}`}>
+            <Image src={nextIcon} alt="더보기" width={12} height={12} />
+          </Link>
         </div>
         <div className="grid grid-cols-2 gap-4 w-full">
           {sellingProducts.map((p) => {
