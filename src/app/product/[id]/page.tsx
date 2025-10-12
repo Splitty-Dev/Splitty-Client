@@ -1,12 +1,15 @@
 import Image from "next/image";
 import homeWhite from "@/assets/icons/homeWhite.svg";
-import backWhite from "@/assets/icons/backWhite.svg";
+
 import rateIcon from "@/assets/icons/staricon.svg";
 import personIcon from "@/assets/icons/product_person.svg";
 import locationIcon from "@/assets/icons/product_location.svg";
 import nextIcon from "@/assets/icons/product_next.svg";
 
 import { sampleProduct, sellingProducts } from "@/mocks/sampleProduct";
+import Link from "next/link";
+import BackBtn from "../_component_/backBtn";
+import ItemBox from "../_component_/itemBox";
 
 export default async function Page({
   params,
@@ -19,8 +22,10 @@ export default async function Page({
   return (
     <div className="-mt-[47px] typo-r12 relative mb-[80px]">
       <div className="absolute top-[47px] left-4 z-11 flex gap-4">
-        <Image src={backWhite} alt="back" width={24} height={24} />
-        <Image src={homeWhite} alt="home" width={20} height={20} />
+        <BackBtn />
+        <Link href={`/`}>
+          <Image src={homeWhite} alt="home" width={20} height={20} />
+        </Link>
       </div>
       <section>
         <div className="flex overflow-x-auto snap-mandatory snap-x scrollbar-hide w-full h-[385px] relative">
@@ -90,18 +95,15 @@ export default async function Page({
           <Image src={nextIcon} alt="더보기" width={12} height={12} />
         </div>
         <div className="grid grid-cols-2 gap-4 w-full">
-          {sellingProducts.map((p) => (
-            <div key={p.id} className="rounded-[4px] ">
-              <Image
-                src={p.thumbImg}
-                alt={p.title}
-                height={118}
-                className="rounded-[4px] object-cover"
-              />
-              <p className="typo-r14 mt-[4px]">{p.title}</p>
-              <p className="typo-r12 text-[#8C8C8C]">{p.price}원</p>
-            </div>
-          ))}
+          {sellingProducts.map((p) => {
+            const data = {
+              id: p.id,
+              thumbImg: p.thumbImg,
+              title: p.title,
+              price: p.price,
+            };
+            return <ItemBox p={data} key={p.id} />;
+          })}
         </div>
       </section>
     </div>
