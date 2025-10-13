@@ -16,7 +16,9 @@ export default function Home() {
             <Image src={noticeIcon} alt="notice" width={24} height={24} />
           </div>
         </div>
-        <CategoryBar />
+        <div className=" border-b border-[#F2F2F2]">
+          <CategoryBar isAll={true} />
+        </div>
       </div>
 
       <div className="pt-[125px]">

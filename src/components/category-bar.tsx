@@ -1,22 +1,34 @@
 "use client";
 import { useState } from "react";
 
-const categories = [
-  "전체",
-  "식품",
-  "생활/주방",
-  "뷰티/미용",
-  "패션",
-  "건강/운동",
-  "유아/아동",
-];
+const CATEGORIES = {
+  withAll: [
+    "전체",
+    "식품",
+    "생활/주방",
+    "뷰티/미용",
+    "패션",
+    "건강/운동",
+    "유아/아동",
+  ],
 
-export default function CategoryBar() {
-  const [category, setCategory] = useState("전체");
+  withoutAll: [
+    "식품",
+    "생활/주방",
+    "뷰티/미용",
+    "패션",
+    "건강/운동",
+    "유아/아동",
+  ],
+};
+
+export default function CategoryBar({ isAll }: { isAll: boolean }) {
+  const categoryList = isAll ? CATEGORIES.withAll : CATEGORIES.withoutAll;
+  const [category, setCategory] = useState(categoryList[0]);
 
   return (
-    <div className=" px-4 typo-r14 flex py-4 overflow-x-auto gap-2 whitespace-nowrap scroll-smooth [scrollbar-width:none] border-b border-[#F2F2F2]">
-      {categories.map((cat, idx) => (
+    <div className=" px-4 typo-r14 flex py-4 overflow-x-auto gap-2 whitespace-nowrap scroll-smooth [scrollbar-width:none] ">
+      {categoryList.map((cat, idx) => (
         <div
           className={`py-2 px-3 border-[1px] border-[#F2F2F2] rounded-[100px] cursor-pointer ${
             cat === category ? "bg-[#000] text-white" : "bg-white"
