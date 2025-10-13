@@ -24,7 +24,7 @@ const formInputs = [
 export default function UploadPage() {
   const router = useRouter();
   return (
-    <div className="relative pt-[47px]">
+    <div className="relative pt-[47px] pb-[130px]">
       <div
         className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[47px] items-center flex border-b border-[#F2F2F2] "
         onClick={() => router.back()}
@@ -46,7 +46,9 @@ export default function UploadPage() {
               {f.label}
               <Tag
                 placeholder={f.placeHolder}
-                className="px-[14px] py-[10px] border-[1px] border-[#F2F2F2] rounded-[4px]  focus:outline-none focus:border-[#999]"
+                className={`px-[14px] py-[10px] border-[1px] border-[#F2F2F2] rounded-[4px]  focus:outline-none focus:border-[#999] ${
+                  isTextArea ? "min-h-[75px]" : ""
+                }`}
               />
             </div>
           );
