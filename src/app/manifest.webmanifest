@@ -1,0 +1,25 @@
+{
+  "theme_color": "#4f4df8",
+  "background_color": "#4f4df8",
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "/logoIcons/icon512_maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "/logoIcons/icon512_rounded.png",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "any",
+  "display": "fullscreen",
+  "dir": "auto",
+  "lang": "ko-KR",
+  "name": "Splitty",
+  "short_name": "Splitty",
+  "start_url": "/"
+}
