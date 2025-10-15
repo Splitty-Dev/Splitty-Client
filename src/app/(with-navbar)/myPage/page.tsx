@@ -1,4 +1,5 @@
 import MyHistory from "./_component_/myHistory";
+import MyLikedList from "./_component_/myLikedList";
 import MyLocation from "./_component_/myLocation";
 import UserInfo from "./_component_/userInfo"; //Mypage _component_ 폴더
 
@@ -17,6 +18,7 @@ export default function MyPage() {
         <UserInfo />
         <MyHistory />
         <MyLocation />
+        <MyLikedList />
       </main>
     </div>
   );

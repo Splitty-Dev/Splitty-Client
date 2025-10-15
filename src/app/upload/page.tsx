@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import CategoryBar from "@/components/category-bar";
 
 import TextareaAutosize from "react-textarea-autosize";
+import UploadBottomSection from "./_component_/upload-bottom-section";
+import { useState } from "react";
 
 const formInputs = [
   { label: "상품명", placeHolder: "물품명을 적어주세요." },
@@ -23,8 +25,25 @@ const formInputs = [
 
 export default function UploadPage() {
   const router = useRouter();
+
+  const [inputList, setInputList] = useState({
+    title: "",
+    totalPrice: "",
+    totalNum: 1,
+    sellingNum: 0,
+    description: "",
+    meetingPlace: "",
+  });
+
+  const totalPriceNum = Number(inputList.totalPrice);
+  const totalNumNum = Number(inputList.totalNum);
+
+  const oneProductPrice =
+    totalPriceNum && totalNumNum ? (totalPriceNum / totalNumNum).toFixed(0) : 0;
+
   return (
-    <div className="relative pt-[47px] pb-[130px]">
+    <div className="relative pt-[47px] pb-[80px]">
+      <UploadBottomSection price={`${oneProductPrice}원`} />
       <div
         className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[47px] items-center flex border-b border-[#F2F2F2] "
         onClick={() => router.back()}
@@ -49,6 +68,12 @@ export default function UploadPage() {
                 className={`px-[14px] py-[10px] border-[1px] border-[#F2F2F2] rounded-[4px]  focus:outline-none focus:border-[#999] ${
                   isTextArea ? "min-h-[75px]" : ""
                 }`}
+                onChange={(e) =>
+                  setInputList((prev) => ({
+                    ...prev,
+                    [Object.keys(inputList)[idx]]: e.target.value,
+                  }))
+                }
               />
             </div>
           );
