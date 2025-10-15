@@ -1,0 +1,45 @@
+export const sampleLikedMock = [
+  {
+    id: 1,
+    title: "에코 생수 500ml",
+    location: "미아동",
+    people: 2,
+    price: "1,600",
+    //
+    currNums: 3,
+    totalNums: 5,
+    //
+    likes: 5,
+    // 카테고리 필요함
+  },
+  {
+    id: 2,
+    title: "에코 생수 500ml",
+    location: "미아동",
+    people: 3,
+    price: "1,600",
+    currNums: 2,
+    totalNums: 3,
+    likes: 2,
+  },
+  {
+    id: 3,
+    title: "에코 생수 500ml",
+    location: "미아동",
+    people: 2,
+    price: "1,600",
+    currNums: 3,
+    totalNums: 5,
+    likes: 5,
+  },
+  {
+    id: 4,
+    title: "에코 생수 500ml",
+    location: "미아동",
+    people: 3,
+    price: "1,600",
+    currNums: 2,
+    totalNums: 3,
+    likes: 2,
+  },
+];
