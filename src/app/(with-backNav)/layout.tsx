@@ -1,21 +1,17 @@
 "use client";
 
 import { ReactNode } from "react";
-import backIcon from "@/assets/icons/backIcon.svg";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import BackBkBtn from "@/components/back-bk-btn";
 
 export default function WithNavbarLayout({
   children,
 }: {
   children: ReactNode;
 }) {
-  const router = useRouter();
-
   return (
     <div>
-      <div className="px-4 py-3" onClick={() => router.back()}>
-        <Image src={backIcon} alt="< 뒤로가기" width={24} height={24} />
+      <div className="px-4 py-3">
+        <BackBkBtn />
       </div>
       {children}
     </div>

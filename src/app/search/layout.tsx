@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import SearchBar from "./_component_/search-bar";
 
-export default function WithNavbarLayout({
+export default function WithSearchBarLayout({
   children,
 }: {
   children: ReactNode;

@@ -16,7 +16,9 @@ export default function Home() {
         <div className="flex px-4 py-3 justify-between ">
           <div className="typo-b18 ">미아동</div>
           <div className=" h-6 flex gap-4">
-            <Image src={searchIcon} alt="search" width={24} height={24} />
+            <Link href={`/search`}>
+              <Image src={searchIcon} alt="search" width={24} height={24} />
+            </Link>
             <Link href={`/notice`}>
               <Image src={noticeIcon} alt="notice" width={24} height={24} />
             </Link>
