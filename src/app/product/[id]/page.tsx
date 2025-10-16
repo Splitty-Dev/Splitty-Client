@@ -7,7 +7,7 @@ import locationIcon from "@/assets/icons/product_location.svg";
 import { sampleProduct, sellingProducts } from "@/mocks/sampleProduct";
 
 import Link from "next/link";
-import BackBtn from "../_component_/backBtn";
+import BackBtn from "../../../components/backBtn";
 import ItemBox from "../_component_/itemBox";
 import SellerInfo from "../_component_/seller-section";
 import ImgSection from "../_component_/img-section";
