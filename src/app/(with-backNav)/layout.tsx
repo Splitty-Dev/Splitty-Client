@@ -15,7 +15,7 @@ export default function WithNavbarLayout({
   return (
     <div>
       <div className="px-4 py-3" onClick={() => router.back()}>
-        <Image src={backIcon} alt="< 뒤로가기" />
+        <Image src={backIcon} alt="< 뒤로가기" width={24} height={24} />
       </div>
       {children}
     </div>
