@@ -42,11 +42,10 @@ export default function HistoryItemBox({
   kind: "sales" | "purchases";
 }) {
   return (
-    <Link
-      href={`/product/${product.id}`}
+    <div
       className={`mx-4  py-4 flex flex-col gap-4 border-b border-[#F2F2F2] ${className} cursor-pointer`}
     >
-      <div className={` flex gap-4 `}>
+      <Link href={`/product/${product.id}`} className={` flex gap-4 `}>
         <Image
           src={sampleImg}
           alt={product.title}
@@ -65,7 +64,7 @@ export default function HistoryItemBox({
             {product.likes}
           </div>
         </div>
-      </div>
+      </Link>
       <div className="typo-b12 gap-2 flex">
         <button className="bg-[#F2F2F2] w-full rounded-[4px] py-2">
           채팅보기
@@ -77,6 +76,6 @@ export default function HistoryItemBox({
           </button>
         )}
       </div>
-    </Link>
+    </div>
   );
 }
