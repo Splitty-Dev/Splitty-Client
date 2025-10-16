@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import closeIcon from "@/assets/icons/closeIcon.svg";
+
 import camIcon from "@/assets/icons/camIcon.svg";
 
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import CategoryBar from "@/components/category-bar";
 import TextareaAutosize from "react-textarea-autosize";
 import UploadBottomSection from "./_component_/upload-bottom-section";
 import { useState } from "react";
+import CloseButton from "@/components/close-button";
 
 const formInputs = [
   { label: "상품명", placeHolder: "물품명을 적어주세요." },
@@ -44,11 +45,8 @@ export default function UploadPage() {
   return (
     <div className="relative pt-[47px] pb-[80px]">
       <UploadBottomSection price={`${oneProductPrice}원`} />
-      <div
-        className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[47px] items-center flex border-b border-[#F2F2F2] "
-        onClick={() => router.back()}
-      >
-        <Image src={closeIcon} alt="X" width={24} height={24} />
+      <div className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[47px] items-center flex border-b border-[#F2F2F2] ">
+        <CloseButton />
       </div>
       <section className="pl-4 py-3 px-4 ">
         <div className="w-15 h-15 border-[1px] rounded-[4px] border-[#F2F2F2] flex justify-center items-center">

@@ -1,9 +1,13 @@
+//메인 화면 !!
+
+//
 import searchIcon from "@/assets/icons/searchIcon.svg";
 import noticeIcon from "@/assets/icons/noticeIcon.svg";
 import Image from "next/image";
 import { mock } from "@/mocks/mock";
 import ProductItem from "@/components/product-item";
 import CategoryBar from "@/components/category-bar";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,7 +17,9 @@ export default function Home() {
           <div className="typo-b18 ">미아동</div>
           <div className=" h-6 flex gap-4">
             <Image src={searchIcon} alt="search" width={24} height={24} />
-            <Image src={noticeIcon} alt="notice" width={24} height={24} />
+            <Link href={`/notice`}>
+              <Image src={noticeIcon} alt="notice" width={24} height={24} />
+            </Link>
           </div>
         </div>
         <div className=" border-b border-[#F2F2F2]">
