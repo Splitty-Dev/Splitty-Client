@@ -11,6 +11,7 @@ export const mock = [
     //
     likes: 5,
     // 카테고리 필요함
+    status: "OPEN",
   },
   {
     id: 2,
@@ -21,6 +22,7 @@ export const mock = [
     currNums: 2,
     totalNums: 3,
     likes: 2,
+    status: "CLOSED",
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ export const mock = [
     currNums: 3,
     totalNums: 5,
     likes: 5,
+    status: "COMPLETED",
   },
   {
     id: 4,
@@ -41,6 +44,7 @@ export const mock = [
     currNums: 2,
     totalNums: 3,
     likes: 2,
+    status: "OPEN",
   },
   {
     id: 5,
@@ -51,6 +55,7 @@ export const mock = [
     currNums: 3,
     totalNums: 5,
     likes: 5,
+    status: "CLOSED",
   },
   {
     id: 6,
@@ -62,5 +67,6 @@ export const mock = [
     currNums: 2,
     totalNums: 3,
     likes: 2,
+    status: "COMPLETED",
   },
-];
+] as const;
