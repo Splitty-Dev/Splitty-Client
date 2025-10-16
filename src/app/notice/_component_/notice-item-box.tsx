@@ -13,7 +13,7 @@ export default function NoticeItemBox({
   image: StaticImageData;
 }) {
   return (
-    <div className="flex gap-3 py-3 border-b border-[#F2F2F2]">
+    <div className="flex gap-3 py-3 border-b border-[#F2F2F2] h-auto">
       <Image
         src={image}
         alt="img"
@@ -26,7 +26,7 @@ export default function NoticeItemBox({
           <h4 className="typo-b14">{title}</h4>
           <p className="typo-r12">{content}</p>
         </div>
-        <div className="typo-r10 text-[#8C8C8C]">{time}</div>
+        <div className="typo-r10 text-[#8C8C8C] min-w-[27px]">{time}</div>
       </div>
     </div>
   );
