@@ -3,8 +3,6 @@
 import Image from "next/image";
 
 import camIcon from "@/assets/icons/camIcon.svg";
-
-import { useRouter } from "next/navigation";
 import CategoryBar from "@/components/category-bar";
 
 import TextareaAutosize from "react-textarea-autosize";
@@ -25,8 +23,6 @@ const formInputs = [
 ];
 
 export default function UploadPage() {
-  const router = useRouter();
-
   const [inputList, setInputList] = useState({
     title: "",
     totalPrice: "",
