@@ -53,7 +53,7 @@ export default function ConfirmDeal() {
                   <Image src={minisIcon} alt="-" width={20} height={20} />
                 </button>
                 <input
-                  className="w-10 text-center"
+                  className="w-10 text-center focus:outline-[#F2F2F2]"
                   value={quantities[idx]}
                   onChange={(e) => handleInputChange(idx, e.target.value)}
                 />
@@ -62,7 +62,9 @@ export default function ConfirmDeal() {
                   <Image src={plusIcon} alt="+" width={20} height={20} />
                 </button>
               </div>
-              <div className="">{pricePerItem * quantities[idx]}원</div>
+              <div className="">
+                {(pricePerItem * quantities[idx]).toLocaleString()}원
+              </div>
             </div>
           ))}
         </div>
