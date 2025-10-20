@@ -3,16 +3,20 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import kakaoIcon from "@/assets/icons/kakao.svg";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function SplittyIntro() {
   const [reveal, setReveal] = useState(false);
   const letters = ["p", "l", "i", "t", "t", "y"];
 
+  const KAKAO_AUTH_URL = `https://splitty.store/oauth2/authorization/kakao`;
   useEffect(() => {
     const t = setTimeout(() => setReveal(true), 1100); // 네모 갈라지고 글자 보이게
     return () => clearTimeout(t);
   }, []);
+
+  const handleLogin = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#4f4df8] overflow-hidden -my-[47px] pb-[180px] relative">
@@ -26,12 +30,13 @@ export default function SplittyIntro() {
           ease: [0.25, 0.1, 0.25, 1],
         }}
       >
-        <Link href={`/`}>
-          <button className="bg-[#FEDC2C] w-full py-4 rounded-lg typo-r16 flex gap-3 justify-center items-center">
-            <Image src={kakaoIcon} alt="카카오로그인" />
-            카카오톡으로 시작하기
-          </button>
-        </Link>
+        <button
+          onClick={handleLogin}
+          className="bg-[#FEDC2C] w-full py-4 rounded-lg typo-r16 flex gap-3 justify-center items-center"
+        >
+          <Image src={kakaoIcon} alt="카카오로그인" />
+          카카오톡으로 시작하기
+        </button>
       </motion.div>
       <div className="flex items-center gap-2">
         {/* --- (겹친 네모) --- */}
