@@ -1,5 +1,4 @@
 "use client";
-import { myPageMockData } from "@/mocks/sampleprf";
 
 import rateIcon from "@/assets/icons/staricon.svg";
 import samplePrf from "@/assets/icons/samplePrf.svg";
@@ -22,7 +21,7 @@ export default function UserInfo() {
         <div className="flex flex-col gap-[2px]">
           <p className="typo-b14">{data?.username}</p>
           <p className="typo-r12 text-[#4F4F4F]">
-            {data?.location || "내 지역을 설정해주세요"}
+            {data?.neighName || "내 지역을 설정해주세요"}
           </p>
         </div>
       </div>
