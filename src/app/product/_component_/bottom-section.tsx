@@ -1,6 +1,3 @@
-import Image from "next/image";
-
-import likeIcon from "@/assets/icons/bigLikeIcon.svg";
 import LikePopBtn from "@/components/like-pop-btn";
 
 export default function ProductDetailBottomSection({
