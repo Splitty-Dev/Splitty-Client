@@ -3,16 +3,38 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import kakaoIcon from "@/assets/icons/kakao.svg";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function SplittyIntro() {
   const [reveal, setReveal] = useState(false);
+  const [showKakaoLogin, setShowKakaoLogin] = useState(true);
   const letters = ["p", "l", "i", "t", "t", "y"];
+  const router = useRouter();
 
   const KAKAO_AUTH_URL = `https://splitty.store/oauth2/authorization/kakao`;
+
   useEffect(() => {
-    const t = setTimeout(() => setReveal(true), 1100); // 네모 갈라지고 글자 보이게
-    return () => clearTimeout(t);
-  }, []);
+    const accessToken = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("__next_hmr_refresh_hash__"));
+
+    const textAnimationDelay = 1100;
+    const redirectDelay = 2900;
+    const revealTimeout = setTimeout(() => setReveal(true), textAnimationDelay);
+
+    if (accessToken) {
+      setShowKakaoLogin(false);
+      const redirectTimeout = setTimeout(() => {
+        router.push("/");
+      }, redirectDelay);
+      return () => {
+        clearTimeout(revealTimeout);
+        clearTimeout(redirectTimeout);
+      };
+    } else {
+      return () => clearTimeout(revealTimeout);
+    }
+  }, [router]);
 
   const handleLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
@@ -20,24 +42,26 @@ export default function SplittyIntro() {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[#4f4df8] overflow-hidden -my-[47px] pb-[180px] relative">
-      <motion.div
-        className="absolute bottom-[120px] px-5 w-full "
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          delay: 2.4,
-          duration: 0.3,
-          ease: [0.25, 0.1, 0.25, 1],
-        }}
-      >
-        <button
-          onClick={handleLogin}
-          className="bg-[#FEDC2C] w-full py-4 rounded-lg typo-r16 flex gap-3 justify-center items-center"
+      {showKakaoLogin && (
+        <motion.div
+          className="absolute bottom-[120px] px-5 w-full "
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            delay: 2.4,
+            duration: 0.3,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
         >
-          <Image src={kakaoIcon} alt="카카오로그인" />
-          카카오톡으로 시작하기
-        </button>
-      </motion.div>
+          <button
+            onClick={handleLogin}
+            className="bg-[#FEDC2C] w-full py-4 rounded-lg typo-r16 flex gap-3 justify-center items-center"
+          >
+            <Image src={kakaoIcon} alt="카카오로그인" />
+            카카오톡으로 시작하기
+          </button>
+        </motion.div>
+      )}
       <div className="flex items-center gap-2">
         {/* --- (겹친 네모) --- */}
         <motion.div className="relative w-14 h-14">
