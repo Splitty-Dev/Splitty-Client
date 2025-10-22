@@ -4,10 +4,12 @@ import rateIcon from "@/assets/icons/staricon.svg";
 import samplePrf from "@/assets/icons/samplePrf.svg";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { getMyInfo } from "@/app/api/member";
+import { getMyInfo, getUserInfo } from "@/app/api/member";
 
-export default function UserInfo() {
-  const { data } = useQuery({ queryKey: ["me"], queryFn: getMyInfo });
+export default function UserInfo({ memberId }: { memberId?: number }) {
+  const queryKey = memberId ? ["member", memberId] : ["me"];
+  const queryFn = memberId ? () => getUserInfo(memberId) : getMyInfo;
+  const { data } = useQuery({ queryKey, queryFn });
 
   return (
     <section className="bg-white mx-4 px-4 py-[14px] rounded-[10px] flex items-center justify-between ">

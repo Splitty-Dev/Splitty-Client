@@ -21,3 +21,8 @@ export const postLocation = async ({
     }),
   });
 };
+
+export const getUserInfo = async (memberId: number) => {
+  const res = await apiFetch(`/member/${memberId}`);
+  return res.data;
+};

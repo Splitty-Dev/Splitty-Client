@@ -1,20 +1,17 @@
-// "use client";
-
 import UserInfo from "@/app/(with-navbar)/myPage/_component_/userInfo";
 import ReviewList from "../_component_/review-list";
 import SalesProduct from "../_component_/sales-product";
 
-export default async function SellerDetailPage({
+export default function SellerDetailPage({
   params,
 }: {
-  params: Promise<{ id: string | string[] }>;
+  params: { id: string };
 }) {
-  const { id } = await params;
-  console.log(id);
+  const id = parseInt(params.id);
 
   return (
     <section className="-mx-4">
-      <UserInfo />
+      <UserInfo memberId={id} />
       <div className="mx-4">
         <ReviewList />
         <SalesProduct />
