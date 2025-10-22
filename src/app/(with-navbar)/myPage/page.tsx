@@ -1,14 +1,7 @@
 import MyHistory from "./_component_/myHistory";
 import MyLikedList from "./_component_/myLikedList";
 import MyLocation from "./_component_/myLocation";
-import UserInfo from "./_component_/userInfo"; //Mypage _component_ 폴더
-
-// interface MyPageProps {
-//   //image
-//   name: string;
-//   location: string;
-//   rating: number;
-// }
+import UserInfo from "./_component_/userInfo";
 
 export default function MyPage() {
   return (
