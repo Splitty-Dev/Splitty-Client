@@ -12,7 +12,7 @@ export const postLocation = async ({
   latitude: number;
   longitude: number;
 }) => {
-  await apiFetch(`/member/neighborhood`, {
+  await apiFetch(`/member/me/neighborhood`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
