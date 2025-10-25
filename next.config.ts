@@ -11,6 +11,14 @@ const nextConfig: NextConfig = withPWA({
   experimental: {
     appDir: true, // App Router 사용 시 필요
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "splitty-bucket.s3.ap-northeast-2.amazonaws.com",
+      },
+    ],
+  },
 });
 
 export default nextConfig;

@@ -14,6 +14,9 @@ interface ProductItemProps {
   imageUrl: string;
 }
 
+const IMAGE_BASE_URL =
+  "https://splitty-bucket.s3.ap-northeast-2.amazonaws.com/";
+
 export default function ProductItem({
   product,
   className = "",
@@ -21,13 +24,18 @@ export default function ProductItem({
   product: ProductItemProps;
   className?: string;
 }) {
+  const imageUrl = product.imageUrl
+    ? `${IMAGE_BASE_URL}${product.imageUrl}`
+    : sampleImg;
+
   return (
     <Link
       href={`/product/${product.id}`}
       className={`mx-4  py-4 flex gap-4 border-b border-[#F2F2F2] ${className} cursor-pointer`}
     >
       <Image
-        src={product.imageUrl}
+        // src={`${IMAGE_BASE_URL}${`2254dc60-39d7-4847-b1f6-0518c751a782.jpeg`}`}
+        src={imageUrl}
         alt={product.name}
         className="w-[110px] h-[110px] rounded-[4px] object-cover "
         width={110}
