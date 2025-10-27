@@ -20,7 +20,7 @@ import BackBkBtn from "@/components/back-bk-btn";
 
 export default function ProductDetailClient({ id }: { id: number }) {
   const goodsId = id;
-  console.log(goodsId);
+
   const { data: product } = useQuery({
     queryKey: ["goodsId", goodsId],
     queryFn: () => getProductDetail(goodsId),
@@ -68,7 +68,7 @@ export default function ProductDetailClient({ id }: { id: number }) {
             </p>
           </div>
           <div className="typo-r14">{product?.description}</div>
-          <div className="text-[#8C8C8C]">{`관심 ${sampleProduct.likes} · 조회 311`}</div>
+          <div className="text-[#8C8C8C]">{`관심 ${sampleProduct.likes} · 조회 ${product?.viewCount}`}</div>
         </div>
       </section>
       {/* 판매상품 목록*/}
@@ -96,6 +96,7 @@ export default function ProductDetailClient({ id }: { id: number }) {
       <ProductDetailBottomSection
         price={product?.unitPrice}
         rest={product?.leftQuantity}
+        goodsId={goodsId}
       />
     </div>
   );

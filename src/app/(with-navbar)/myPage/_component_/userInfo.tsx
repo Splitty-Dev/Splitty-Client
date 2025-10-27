@@ -13,14 +13,16 @@ export default function UserInfo({ memberId }: { memberId?: number }) {
 
   return (
     <section className="bg-white mx-4 px-4 py-[14px] rounded-[10px] flex items-center justify-between ">
-      <div className="flex gap-2 items-center rounded-[100px]">
-        <Image
-          src={data?.profileImageUrl || samplePrf}
-          alt="profile"
-          width={40}
-          height={40}
-          className=" rounded-[100px]"
-        />
+      <div className="flex gap-2 items-center ">
+        <div className="w-10 h-10 rounded-[100px] overflow-hidden">
+          <Image
+            src={data?.profileImageUrl || samplePrf}
+            alt="profile"
+            width={40}
+            height={40}
+            className="object-cover"
+          />
+        </div>
         <div className="flex flex-col gap-[2px]">
           <p className="typo-b14">{data?.username}</p>
           <p className="typo-r12 text-[#4F4F4F]">

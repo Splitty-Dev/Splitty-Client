@@ -2,10 +2,19 @@
 import { Heart } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { apiFetch } from "@/app/api";
 
-export default function LikePopBtn() {
+export default function LikePopBtn({ goodsId }: { goodsId: number }) {
   const [liked, setLiked] = useState(false);
-  const handleLike = () => {
+  const handleLike = async () => {
+    if (!liked) {
+      await apiFetch(`/wishlist`, {
+        method: "POST",
+        body: JSON.stringify({ goodsId }),
+      });
+    } else {
+      await apiFetch(`/wishlist/${goodsId}`, { method: "DELETE" });
+    }
     setLiked(!liked);
   };
   return (

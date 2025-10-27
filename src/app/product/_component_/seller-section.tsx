@@ -26,6 +26,7 @@ export default function SellerInfo({
           alt={info?.username || ""}
           width={40}
           height={40}
+          className="rounded-[100px] object-cover"
         />
         <div className=" flex flex-col gap-1">
           <h4 className="typo-b14">{info?.username}</h4>
