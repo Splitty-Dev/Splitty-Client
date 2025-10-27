@@ -8,5 +8,5 @@ export interface productType {
   currParticipants: number;
   imageUrl: string;
   sellerId: number;
-  status: string;
+  status: "OPEN" | "CLOSED" | "COMPLETED";
 }
