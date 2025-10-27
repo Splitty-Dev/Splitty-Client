@@ -12,6 +12,7 @@ interface ProductItemProps {
   price: number;
   // likes: number;
   imageUrl: string;
+  status: "OPEN" | "CLOSED" | "COMPLETED";
 }
 
 const IMAGE_BASE_URL =
@@ -46,6 +47,11 @@ export default function ProductItem({
           <h2 className="typo-r14">{product.name}</h2>
           <p className="typo-r12 text-[#8C8C8C]">{`${product.neighName} ・ ${product.currParticipants}명 참여중`}</p>
           <h3 className="text-[15px] font-bold">{product.price}원</h3>
+          {product.status === "COMPLETED" && (
+            <p className="text-[10px] py-1 px-[17.5px] rounded-[4px] bg-[#000] text-[white] font-sm w-[72px] h-[18px] flex items-center">
+              거래완료
+            </p>
+          )}
         </div>
         <div className="flex justify-end typo-r12 text-[#8C8C8C] items-center gap-[2px]">
           <Image src={bagIcon} alt="bag" />
