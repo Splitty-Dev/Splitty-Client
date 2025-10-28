@@ -7,7 +7,7 @@ import ProductItem from "@/components/product-item";
 import CategoryBar from "@/components/category-bar";
 import Link from "next/link";
 import { useCursorProducts } from "@/hooks/useCursorProducts";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { productType } from "../../types/product";
 import { useQuery } from "@tanstack/react-query";
 import { getMyInfo } from "../api/member";
@@ -15,8 +15,9 @@ import { getMyInfo } from "../api/member";
 export default function Home() {
   const { data: myInfo } = useQuery({ queryKey: ["me"], queryFn: getMyInfo });
 
+  const [categoryId, setCategoryId] = useState(0);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useCursorProducts();
+    useCursorProducts(categoryId);
 
   const observerRef = useRef<HTMLDivElement | null>(null);
   const isCalledNext = useRef(false);
@@ -60,7 +61,10 @@ export default function Home() {
           </div>
         </div>
         <div className=" border-b border-[#F2F2F2]">
-          <CategoryBar isAll={true} />
+          <CategoryBar
+            isAll={true}
+            onSelectCategory={(id) => setCategoryId(id)}
+          />
         </div>
       </div>
 

@@ -5,8 +5,16 @@ export const getProductDetail = async (goodsId: number) => {
   return res.data;
 };
 
-export const getProductAll = async ({ pageParam = null }) => {
-  const url = pageParam ? `/goods?cursorId=${pageParam}` : `/goods`;
+export const getProductAll = async ({
+  pageParam,
+}: {
+  pageParam?: { lastId: number | null; categoryId: number };
+}) => {
+  const queryParams = new URLSearchParams();
+  queryParams.set("categoryId", String(pageParam?.categoryId ?? 0));
+  if (pageParam?.lastId) queryParams.set("cursorId", String(pageParam.lastId));
+
+  const url = `/goods?${queryParams.toString()}`;
   const res = await apiFetch(url);
 
   return {
