@@ -1,12 +1,14 @@
 "use client";
-import samplePrf from "@/assets/icons/samplePrf.svg";
-import { mock } from "@/mocks/mock";
 
+import samplePrf from "@/assets/icons/samplePrf.svg";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HistoryItemBox from "../_component_/item-box";
+import { useCursorHistoryList } from "@/hooks/useCursorHistoryList";
+import { InfiniteData } from "@tanstack/react-query";
+import { HistoryListResponse } from "@/types/history";
+import { productType } from "@/types/product";
 
 const categories = [
   { label: "모집중", status: "OPEN" },
@@ -24,31 +26,69 @@ export default function Page() {
   const title = TITLE_MAP[kind];
   const [category, setCategory] = useState(categories[0]);
 
+  const { data, fetchNextPage, hasNextPage } = useCursorHistoryList(
+    kind,
+    category.status
+  );
+
+  const observerRef = useRef<HTMLDivElement | null>(null);
+  const isCalledNext = useRef(false);
+
+  useEffect(() => {
+    const node = observerRef.current;
+    if (!node || !hasNextPage) return;
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      const target = entries[0];
+      if (target.isIntersecting && !isCalledNext.current) {
+        isCalledNext.current = true;
+        fetchNextPage();
+        obs.unobserve(target.target);
+      }
+    });
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage]);
+
+  useEffect(() => {
+    isCalledNext.current = false;
+  }, [data]);
+
+  const historyItems =
+    (data as InfiniteData<HistoryListResponse>)?.pages.flatMap(
+      (page) => page.items
+    ) ?? [];
+
   return (
-    <main className="">
-      <div className=" py-[21px] flex justify-between items-center px-4">
+    <main>
+      {/* Header */}
+      <div className="py-[21px] flex justify-between items-center px-4">
         <h2 className="typo-b18">{title}</h2>
         <Image src={samplePrf} alt="profile" width={40} height={40} />
       </div>
-      <div className=" flex gap-2 py-3 typo-r12 px-4">
+
+      {/* Category Bar */}
+      <div className="flex gap-2 py-3 typo-r12 px-4">
         {categories.map((cat) => (
           <div
-            className={`py-2 px-3 border-[1px] border-[#F2F2F2] rounded-[100px] cursor-pointer ${
-              cat.label === category.label ? "bg-[#000] text-white" : "bg-white"
-            }`}
             key={cat.status}
+            className={`py-2 px-3 border border-[#F2F2F2] rounded-[100px] cursor-pointer ${
+              cat.label === category.label ? "bg-black text-white" : "bg-white"
+            }`}
             onClick={() => setCategory(cat)}
           >
             {cat.label}
           </div>
         ))}
       </div>
+
       <section>
-        {mock
-          .filter((e) => e.status === category.status)
-          .map((m) => (
-            <HistoryItemBox product={m} key={m.id} kind={kind} />
-          ))}
+        {historyItems.map((item: productType) => (
+          <HistoryItemBox key={item.id} product={item} kind={kind} />
+        ))}
+
+        {hasNextPage && <div ref={observerRef} />}
       </section>
     </main>
   );
