@@ -42,7 +42,11 @@ export default function CategoryBar({
           key={idx}
           onClick={() => {
             setCategory(cat);
-            onSelectCategory(idx);
+            if (isAll) {
+              onSelectCategory(idx);
+            } else {
+              onSelectCategory(idx + 1);
+            }
           }}
         >
           {cat}

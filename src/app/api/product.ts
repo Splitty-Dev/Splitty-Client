@@ -45,3 +45,21 @@ export const getWishList = async ({
     nextCursor: res.data.nextCursor,
   };
 };
+
+export const createProduct = async (payload: {
+  categoryId: number;
+  name: string;
+  description: string;
+  totalPrice: number;
+  totalQuantity: number;
+  leftQuantity: number;
+  preferredLocation: string;
+  imageNames: string[];
+}) => {
+  const res = await apiFetch(`/goods`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  return res.data;
+};

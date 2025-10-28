@@ -1,12 +1,17 @@
 const BASE_URL = "https://splitty.store/api/v1";
 
 export async function apiFetch(endpoint: string, options: RequestInit = {}) {
+  const isFormData = options.body instanceof FormData;
+  const headers = isFormData
+    ? options.headers
+    : {
+        "Content-Type": "application/json",
+        ...(options.headers || {}),
+      };
+
   const res = await fetch(`${BASE_URL}${endpoint}`, {
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...options.headers,
-    },
+    headers,
     ...options,
   });
 

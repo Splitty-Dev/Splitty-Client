@@ -9,6 +9,8 @@ import TextareaAutosize from "react-textarea-autosize";
 import UploadBottomSection from "./_component_/upload-bottom-section";
 import { useState } from "react";
 import CloseButton from "@/components/close-button";
+import { useUploadProduct } from "@/hooks/useUploadProduct";
+import { useRouter } from "next/navigation";
 
 const formInputs = [
   { label: "상품명", placeHolder: "물품명을 적어주세요." },
@@ -23,17 +25,21 @@ const formInputs = [
 ];
 
 export default function UploadPage() {
+  const router = useRouter();
+  const { mutate: uploadProduct } = useUploadProduct();
   const [inputList, setInputList] = useState({
-    title: "",
-    totalPrice: "",
-    totalNum: 1,
-    sellingNum: 0,
+    name: "",
+    totalPrice: 0,
+    totalQuantity: 1,
+    leftQuantity: 0,
     description: "",
-    meetingPlace: "",
+    preferredLocation: "",
+    imagesNames: [],
+    categoryId: 1,
   });
 
   const totalPriceNum = Number(inputList.totalPrice);
-  const totalNumNum = Number(inputList.totalNum);
+  const totalNumNum = Number(inputList.totalQuantity);
 
   const oneProductPrice =
     totalPriceNum && totalNumNum ? (totalPriceNum / totalNumNum).toFixed(0) : 0;
@@ -49,9 +55,47 @@ export default function UploadPage() {
     setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const handleSelectCategory = (categoryId: number) => {
+    setInputList((prev) => ({
+      ...prev,
+      categoryId,
+    }));
+    console.log(inputList);
+  };
+
+  const handleSubmit = () => {
+    uploadProduct(
+      {
+        productData: {
+          categoryId: inputList.categoryId,
+          name: inputList.name,
+          description: inputList.description,
+          totalPrice: Number(inputList.totalPrice),
+          totalQuantity: Number(inputList.totalQuantity),
+          leftQuantity: Number(inputList.leftQuantity),
+          preferredLocation: inputList.preferredLocation,
+        },
+        files: images,
+      },
+      {
+        onSuccess: () => {
+          alert("상품 등록 완료!");
+          router.push(`/`);
+        },
+        onError: (err) => {
+          alert("등록 중 오류가 발생했습니다!");
+          console.log(err);
+        },
+      }
+    );
+  };
+
   return (
     <div className="relative pt-[47px] pb-[80px]">
-      <UploadBottomSection price={`${oneProductPrice}원`} />
+      <UploadBottomSection
+        price={`${oneProductPrice}원`}
+        onClick={handleSubmit}
+      />
       <div className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[47px] items-center flex border-b border-[#F2F2F2] ">
         <CloseButton />
       </div>
@@ -91,7 +135,7 @@ export default function UploadPage() {
           </div>
         ))}
       </section>
-      <CategoryBar isAll={false} />
+      <CategoryBar isAll={false} onSelectCategory={handleSelectCategory} />
       <form className="px-4">
         {formInputs.map((f, idx) => {
           const isTextArea = idx === 4;
