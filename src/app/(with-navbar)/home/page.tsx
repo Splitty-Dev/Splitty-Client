@@ -8,9 +8,9 @@ import CategoryBar from "@/components/category-bar";
 import Link from "next/link";
 import { useCursorProducts } from "@/hooks/useCursorProducts";
 import { useEffect, useRef, useState } from "react";
-import { productType } from "../../types/product";
+import { productType } from "../../../types/product";
 import { useQuery } from "@tanstack/react-query";
-import { getMyInfo } from "../api/member";
+import { getMyInfo } from "../../api/member";
 
 export default function Home() {
   const { data: myInfo } = useQuery({ queryKey: ["me"], queryFn: getMyInfo });
