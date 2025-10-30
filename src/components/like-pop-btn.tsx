@@ -1,11 +1,23 @@
 "use client";
 import { Heart } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { apiFetch } from "@/app/api";
+import { getIsWish } from "@/app/api/product";
+import { useQuery } from "@tanstack/react-query";
 
 export default function LikePopBtn({ goodsId }: { goodsId: number }) {
+  const queryKey = ["isWishList", goodsId];
+  const queryFn = () => getIsWish(goodsId);
+  const { data } = useQuery({ queryKey, queryFn });
   const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    if (data?.isInWishList !== undefined) {
+      setLiked(data.isInWishList);
+    }
+  }, [data]);
+
   const handleLike = async () => {
     if (!liked) {
       await apiFetch(`/wishlist`, {

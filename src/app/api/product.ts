@@ -71,3 +71,8 @@ export const getHasJoined = async (goodsId: number) => {
   });
   return res.data;
 };
+
+export const getIsWish = async (goodsId: number) => {
+  const res = await apiFetch(`/wishlist/exists?goodsId=${goodsId}`);
+  return res.data;
+};
