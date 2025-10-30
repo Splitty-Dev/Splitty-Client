@@ -26,7 +26,9 @@ export default function ProductDetailBottomSection({
       <div className="flex gap-4 items-center">
         <LikePopBtn goodsId={goodsId} />
         <div className="flex flex-col border-l pl-4 border-[#F2F2F2]">
-          <p className="typo-b14">{`1개당 가격 ${price}`}</p>
+          <p className="typo-b14">{`1개당 가격 ${Number(
+            price
+          ).toLocaleString()}`}</p>
           <p className="typo-b12 text-[#8C8C8C]">{`${rest}개 남음`}</p>
         </div>
       </div>

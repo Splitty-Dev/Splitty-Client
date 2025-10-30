@@ -6,7 +6,8 @@ export interface productType {
   leftQuantity: number;
   quantity: number;
   currParticipants: number;
-  imageUrl: string;
+  totalWishlist: number;
+  imageName: string;
   sellerId: number;
   status: "OPEN" | "CLOSED" | "COMPLETED";
 }

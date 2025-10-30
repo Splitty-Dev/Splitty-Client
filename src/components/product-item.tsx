@@ -10,8 +10,8 @@ interface ProductItemProps {
   neighName: string;
   currParticipants: number;
   price: number;
-  // likes: number;
-  imageName: string;
+  totalWishlist: number;
+  imageName: string | null;
   status: "OPEN" | "CLOSED" | "COMPLETED";
   quantity: number;
   leftQuantity: number;
@@ -48,7 +48,9 @@ export default function ProductItem({
         <div className="flex flex-col gap-1">
           <h2 className="typo-r14">{product.name}</h2>
           <p className="typo-r12 text-[#8C8C8C]">{`${product.neighName} ・ ${product.currParticipants}명 참여중`}</p>
-          <h3 className="text-[15px] font-bold">{product.price}원</h3>
+          <h3 className="text-[15px] font-bold">
+            {product.price.toLocaleString()}원
+          </h3>
           {product.status === "COMPLETED" && (
             <p className="text-[10px] py-1 px-[17.5px] rounded-[4px] bg-[#000] text-[white] font-sm w-[72px] h-[18px] flex items-center">
               거래완료
@@ -59,7 +61,7 @@ export default function ProductItem({
           <Image src={bagIcon} alt="bag" />
           {product.leftQuantity}/{product.quantity}
           <Image src={likeIcon} alt="like" className="pl-[2px]" />
-          {/* {product.likes} api에 없음 */}3
+          {product.totalWishlist}
         </div>
       </div>
     </Link>
