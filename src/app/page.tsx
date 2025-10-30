@@ -16,7 +16,7 @@ export default function SplittyIntro() {
   useEffect(() => {
     const accessToken = document.cookie
       .split("; ")
-      .find((row) => row.startsWith("__next_hmr_refresh_hash__"));
+      .find((row) => row.startsWith("accessToken="));
 
     const textAnimationDelay = 1100;
     const redirectDelay = 2900;
@@ -25,7 +25,7 @@ export default function SplittyIntro() {
     if (accessToken) {
       setShowKakaoLogin(false);
       const redirectTimeout = setTimeout(() => {
-        router.push("/");
+        router.push("/home");
       }, redirectDelay);
       return () => {
         clearTimeout(revealTimeout);
