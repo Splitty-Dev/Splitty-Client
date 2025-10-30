@@ -12,7 +12,7 @@ export const useCursorProducts = (categoryId: number) => {
     getNextPageParam: (lastPage) => {
       return lastPage.hasNext
         ? {
-            lastId: lastPage.nextCursor?.lastId ?? null,
+            lastId: lastPage.nextCursor ?? null,
             categoryId: categoryId,
           }
         : undefined;

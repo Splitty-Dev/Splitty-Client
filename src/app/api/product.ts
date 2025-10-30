@@ -12,6 +12,7 @@ export const getProductAll = async ({
 }) => {
   const queryParams = new URLSearchParams();
   queryParams.set("categoryId", String(pageParam?.categoryId ?? 0));
+
   if (pageParam?.lastId) queryParams.set("cursorId", String(pageParam.lastId));
 
   const url = `/goods?${queryParams.toString()}`;
@@ -20,7 +21,7 @@ export const getProductAll = async ({
   return {
     items: res.data.data,
     hasNext: res.data.hasNext,
-    nextCursor: res.data.nextCursor?.lastId,
+    nextCursor: res.data?.nextCursor?.lastId,
   };
 };
 
