@@ -8,9 +8,6 @@ const nextConfig: NextConfig = withPWA({
   disable: isDev, // 개발환경에선 비활성화
 })({
   reactStrictMode: true,
-  experimental: {
-    appDir: true, // App Router 사용 시 필요
-  },
   images: {
     remotePatterns: [
       {

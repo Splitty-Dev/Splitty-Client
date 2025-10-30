@@ -2,16 +2,16 @@ import UserInfo from "@/app/(with-navbar)/myPage/_component_/userInfo";
 import ReviewList from "../_component_/review-list";
 import SalesProduct from "../_component_/sales-product";
 
-export default function SellerDetailPage({
+export default async function SellerDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const id = parseInt(params.id);
+  const { id } = await params;
 
   return (
     <section className="-mx-4">
-      <UserInfo memberId={id} />
+      <UserInfo memberId={parseInt(id)} />
       <div className="mx-4">
         <ReviewList />
         <SalesProduct />

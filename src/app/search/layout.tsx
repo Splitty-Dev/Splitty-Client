@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import SearchBar from "./_component_/search-bar";
 
 export default function WithSearchBarLayout({
@@ -8,8 +8,10 @@ export default function WithSearchBarLayout({
 }) {
   return (
     <div>
-      <SearchBar />
-      {children}
+      <Suspense>
+        <SearchBar />
+        {children}
+      </Suspense>
     </div>
   );
 }
