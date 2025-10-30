@@ -1,13 +1,21 @@
 "use client";
 
+import { getChatList } from "@/app/api/chat";
 import ChatListItem from "@/components/chat-list-item";
-import { sampleChatList } from "@/mocks/sampleChatList";
+import { chatListItem } from "@/types/chat";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-const categories = ["판매", "구매"];
+const categories = ["판매", "구매"] as const;
+const role = { 판매: "SELLER", 구매: "BUYER" } as const;
 
 export default function ChatPage() {
-  const [selectedCat, setSelectedCat] = useState(categories[0]);
+  const [selectedCat, setSelectedCat] = useState<"판매" | "구매">("판매");
+
+  const queryKey = ["chatList", role[selectedCat]];
+  const queryFn = () => getChatList({ role: role[selectedCat] });
+  const { data } = useQuery({ queryKey, queryFn });
+
   return (
     <div className="flex flex-col">
       <div className="fixed top-0 pt-[47px] w-full bg-white z-10">
@@ -32,11 +40,11 @@ export default function ChatPage() {
       </div>
 
       <div className="pt-[125px]">
-        {sampleChatList.map((c) => (
+        {data?.map((c: chatListItem) => (
           <ChatListItem
             chatListData={c}
-            key={c.id}
-            className={c.id === sampleChatList.length ? "mb-14" : ""}
+            key={c.goodsId}
+            // className={c.goodsId === sampleChatList.length ? "mb-14" : ""}
           />
         ))}
       </div>
