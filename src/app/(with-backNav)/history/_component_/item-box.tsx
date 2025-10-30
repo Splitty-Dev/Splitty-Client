@@ -6,7 +6,7 @@ import likeIcon from "@/assets/icons/likeIcon.svg";
 import { productType } from "@/types/product";
 
 import { apiFetch } from "@/app/api";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -36,6 +36,7 @@ export default function HistoryItemBox({
   kind: "sales" | "purchases";
 }) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [status, setStatus] = useState<"OPEN" | "CLOSED" | "COMPLETED">(
     product.status
   );
@@ -54,6 +55,10 @@ export default function HistoryItemBox({
       }),
     onSuccess: (_, next) => {
       setStatus(next);
+      if (next === "CLOSED")
+        queryClient.invalidateQueries({
+          queryKey: ["history", "sales", "OPEN"],
+        });
     },
     onError: (err) => {
       console.error(err);
@@ -87,6 +92,11 @@ export default function HistoryItemBox({
       }
     }
   };
+  const IMAGE_BASE_URL =
+    "https://splitty-bucket.s3.ap-northeast-2.amazonaws.com/";
+  const imageUrl = product.imageName
+    ? `${IMAGE_BASE_URL}${product.imageName}`
+    : sampleImg;
 
   return (
     <div
@@ -94,8 +104,10 @@ export default function HistoryItemBox({
     >
       <Link href={`/product/${product.id}`} className={` flex gap-4 `}>
         <Image
-          src={sampleImg}
+          src={imageUrl}
           alt={product.name}
+          width={110}
+          height={110}
           className="w-[110px] h-[110px] rounded-[4px] object-cover "
         />
         <div className="flex flex-col justify-between flex-1">

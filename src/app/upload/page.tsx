@@ -80,7 +80,7 @@ export default function UploadPage() {
       {
         onSuccess: () => {
           alert("상품 등록 완료!");
-          router.push(`/`);
+          router.push(`/home`);
         },
         onError: (err) => {
           alert("등록 중 오류가 발생했습니다!");

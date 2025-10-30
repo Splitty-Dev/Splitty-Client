@@ -1,10 +1,11 @@
 import LikePopBtn from "@/components/like-pop-btn";
+import { useJoinTrade } from "@/hooks/useStatus";
 
 const statusInfo = {
   OPEN: { text: "참여하기", url: "" },
   CLOSED: { text: "모집완료", url: "" },
   COMPLETED: { text: "거래완료", url: "" },
-  JOINED: { text: "참여중", url: "" },
+  JOINED: { text: "참여중...", url: "" },
 };
 
 export default function ProductDetailBottomSection({
@@ -20,6 +21,11 @@ export default function ProductDetailBottomSection({
 }) {
   const currentStatus = statusInfo[status] ?? statusInfo.OPEN;
   const isDisabled = status === "CLOSED" || status === "COMPLETED";
+
+  const { mutate } = useJoinTrade();
+  const handleJoin = () => {
+    mutate({ goodsId, quantity: 1 });
+  };
 
   return (
     <div className="fixed bottom-0 bg-white flex  w-full typo-r12 items-center align-center px-4 pb-[29px] py-2 border-t border-[#F2F2F2] h-[80px] justify-between">
@@ -39,6 +45,7 @@ export default function ProductDetailBottomSection({
             : "bg-[#4F4DF8] text-white hover:bg-[#3c3ae6]"
         }`}
         disabled={isDisabled}
+        onClick={handleJoin}
       >
         {currentStatus.text}
       </button>

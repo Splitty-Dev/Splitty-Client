@@ -30,18 +30,21 @@ export default function ProductDetailClient({ id }: { id: number }) {
     "OPEN" | "JOINED" | "CLOSED" | "COMPLETED"
   >(product?.status ?? "OPEN");
 
-  const { data: hasJoined } = useQuery({
+  const { data } = useQuery({
     queryKey: ["hasJoined", goodsId],
     queryFn: () => getHasJoined(goodsId),
+    refetchOnMount: true,
   });
 
   useEffect(() => {
-    if (hasJoined === true) {
+    if (product?.status === "COMPLETED") {
+      setStatus("COMPLETED");
+    } else if (data?.hasJoined === true) {
       setStatus("JOINED");
     } else {
       setStatus(product?.status);
     }
-  }, [hasJoined, product?.status]);
+  }, [data, product?.status]);
 
   const isBlank = !product?.images || product.images.length == 0;
 
