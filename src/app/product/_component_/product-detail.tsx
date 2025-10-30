@@ -21,14 +21,14 @@ import { useEffect, useState } from "react";
 
 export default function ProductDetailClient({ id }: { id: number }) {
   const goodsId = id;
-  const [status, setStatus] = useState<
-    "OPEN" | "JOINED" | "CLOSED" | "COMPLETED"
-  >("OPEN");
-
   const { data: product } = useQuery({
     queryKey: ["goodsId", goodsId],
     queryFn: () => getProductDetail(goodsId),
   });
+
+  const [status, setStatus] = useState<
+    "OPEN" | "JOINED" | "CLOSED" | "COMPLETED"
+  >(product?.status ?? "OPEN");
 
   const { data: hasJoined } = useQuery({
     queryKey: ["hasJoined", goodsId],
@@ -36,7 +36,7 @@ export default function ProductDetailClient({ id }: { id: number }) {
   });
 
   useEffect(() => {
-    if (hasJoined) {
+    if (hasJoined === true) {
       setStatus("JOINED");
     } else {
       setStatus(product?.status);

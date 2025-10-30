@@ -25,7 +25,7 @@ export default function BottomNav() {
 
   return (
     <div className="fixed bottom-0 bg-white flex justify-around w-full typo-r12 items-center align-center  pb-[29px] py-2 border-t border-[#F2F2F2]">
-      <Link href={`/`} className="flex flex-col items-center gap-1">
+      <Link href={`/home`} className="flex flex-col items-center gap-1">
         <Image
           src={isHome ? homeIcon2 : homeIcon}
           alt="home"

@@ -5,6 +5,11 @@ import bagIcon from "@/assets/icons/bagIcon.svg";
 import likeIcon from "@/assets/icons/likeIcon.svg";
 import { productType } from "@/types/product";
 
+import { apiFetch } from "@/app/api";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 const btnsList = {
   sales: {
     OPEN: { label: "모집완료" },
@@ -30,8 +35,59 @@ export default function HistoryItemBox({
   className?: string;
   kind: "sales" | "purchases";
 }) {
+  const router = useRouter();
+  const [status, setStatus] = useState<"OPEN" | "CLOSED" | "COMPLETED">(
+    product.status
+  );
+
   const currParticipants =
     product.currParticipants == -1 ? 1 : product.currParticipants;
+
+  const { mutate } = useMutation({
+    mutationFn: async (next: "CLOSED" | "COMPLETED") =>
+      apiFetch(`/trade/change-status`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          goodsId: product.id,
+          tradeStatus: next,
+        }),
+      }),
+    onSuccess: (_, next) => {
+      setStatus(next);
+    },
+    onError: (err) => {
+      console.error(err);
+      alert("상태 변경에 실패했습니다.");
+    },
+  });
+
+  const handleAction = () => {
+    if (kind === "sales") {
+      switch (status) {
+        case "OPEN":
+          mutate("CLOSED");
+          break;
+        case "CLOSED":
+          router.push("/confirm");
+          break;
+        case "COMPLETED":
+          router.push("/review");
+          break;
+      }
+    } else if (kind === "purchases") {
+      switch (status) {
+        case "OPEN":
+          // mutate("나가기???");
+          break;
+        case "COMPLETED":
+          router.push("/review");
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   return (
     <div
       className={`mx-4  py-4 flex flex-col gap-4 border-b border-[#F2F2F2] ${className} cursor-pointer`}
@@ -50,9 +106,9 @@ export default function HistoryItemBox({
           </div>
           <div className="flex justify-end typo-r12 text-[#8C8C8C] items-center gap-[2px]">
             <Image src={bagIcon} alt="bag" />
-            {product.price}원
+            {product.leftQuantity}/{product.quantity}
             <Image src={likeIcon} alt="like" className="pl-[2px]" />
-            {/* {product.likes} */}
+            {product.totalWishlist}
           </div>
         </div>
       </Link>
@@ -61,9 +117,12 @@ export default function HistoryItemBox({
           채팅보기
         </button>
 
-        {btnsList[kind]?.[product.status] && (
-          <button className="bg-[#F2F2F2] w-full rounded-[4px] py-2">
-            {btnsList[kind]?.[product.status]?.label}
+        {btnsList[kind]?.[status] && (
+          <button
+            className="bg-[#F2F2F2] w-full rounded-[4px] py-2"
+            onClick={handleAction}
+          >
+            {btnsList[kind]?.[status]?.label}
           </button>
         )}
       </div>
