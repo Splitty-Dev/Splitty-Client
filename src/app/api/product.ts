@@ -63,3 +63,10 @@ export const createProduct = async (payload: {
   });
   return res.data;
 };
+
+export const getHasJoined = async (goodsId: number) => {
+  const res = await apiFetch(`/trade/is-joined?goodsId=${goodsId}`, {
+    method: "POST",
+  });
+  return res.data;
+};

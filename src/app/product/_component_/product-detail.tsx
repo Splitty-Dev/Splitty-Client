@@ -6,7 +6,7 @@ import nextIcon from "@/assets/icons/product_next.svg";
 import personIcon from "@/assets/icons/product_person.svg";
 import locationIcon from "@/assets/icons/product_location.svg";
 
-import { sampleProduct, sellingProducts } from "@/mocks/sampleProduct";
+import { sellingProducts } from "@/mocks/sampleProduct";
 
 import Link from "next/link";
 import BackBtn from "../../../components/backBtn";
@@ -14,17 +14,34 @@ import ItemBox from "../_component_/itemBox";
 import SellerInfo from "../_component_/seller-section";
 import ImgSection from "../_component_/img-section";
 import ProductDetailBottomSection from "../_component_/bottom-section";
-import { getProductDetail } from "@/app/api/product";
+import { getHasJoined, getProductDetail } from "@/app/api/product";
 import { useQuery } from "@tanstack/react-query";
 import BackBkBtn from "@/components/back-bk-btn";
+import { useEffect, useState } from "react";
 
 export default function ProductDetailClient({ id }: { id: number }) {
   const goodsId = id;
+  const [status, setStatus] = useState<
+    "OPEN" | "JOINED" | "CLOSED" | "COMPLETED"
+  >("OPEN");
 
   const { data: product } = useQuery({
     queryKey: ["goodsId", goodsId],
     queryFn: () => getProductDetail(goodsId),
   });
+
+  const { data: hasJoined } = useQuery({
+    queryKey: ["hasJoined", goodsId],
+    queryFn: () => getHasJoined(goodsId),
+  });
+
+  useEffect(() => {
+    if (hasJoined) {
+      setStatus("JOINED");
+    } else {
+      setStatus(product?.status);
+    }
+  }, [hasJoined, product?.status]);
 
   const isBlank = !product?.images || product.images.length == 0;
 
@@ -45,7 +62,7 @@ export default function ProductDetailClient({ id }: { id: number }) {
       {/* 사진영역 */}
       <ImgSection
         productTitle={product?.name}
-        imageUrls={product?.imageUrl || []}
+        imageUrls={product?.imageName || []}
       />
       {/* 정보영역 */}
       <section className="mx-4 ">
@@ -68,7 +85,7 @@ export default function ProductDetailClient({ id }: { id: number }) {
             </p>
           </div>
           <div className="typo-r14">{product?.description}</div>
-          <div className="text-[#8C8C8C]">{`관심 ${sampleProduct.likes} · 조회 ${product?.viewCount}`}</div>
+          <div className="text-[#8C8C8C]">{`관심 ${product?.totalWishlist} · 조회 ${product?.viewCount}`}</div>
         </div>
       </section>
       {/* 판매상품 목록*/}
@@ -97,6 +114,7 @@ export default function ProductDetailClient({ id }: { id: number }) {
         price={product?.unitPrice}
         rest={product?.leftQuantity}
         goodsId={goodsId}
+        status={status}
       />
     </div>
   );

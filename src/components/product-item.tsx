@@ -11,8 +11,10 @@ interface ProductItemProps {
   currParticipants: number;
   price: number;
   // likes: number;
-  imageUrl: string;
+  imageName: string;
   status: "OPEN" | "CLOSED" | "COMPLETED";
+  quantity: number;
+  leftQuantity: number;
 }
 
 const IMAGE_BASE_URL =
@@ -25,8 +27,8 @@ export default function ProductItem({
   product: ProductItemProps;
   className?: string;
 }) {
-  const imageUrl = product.imageUrl
-    ? `${IMAGE_BASE_URL}${product.imageUrl}`
+  const imageUrl = product.imageName
+    ? `${IMAGE_BASE_URL}${product.imageName}`
     : sampleImg;
 
   return (
@@ -35,7 +37,7 @@ export default function ProductItem({
       className={`mx-4  py-4 flex gap-4 border-b border-[#F2F2F2] ${className} cursor-pointer`}
     >
       <Image
-        // src={`${IMAGE_BASE_URL}${`2254dc60-39d7-4847-b1f6-0518c751a782.jpeg`}`}
+        // src={`${IMAGE_BASE_URL}${`390c95c1-340c-4986-8f71-c7d4059a05cd.jpg`}`}
         src={imageUrl}
         alt={product.name}
         className="w-[110px] h-[110px] rounded-[4px] object-cover "
@@ -55,7 +57,7 @@ export default function ProductItem({
         </div>
         <div className="flex justify-end typo-r12 text-[#8C8C8C] items-center gap-[2px]">
           <Image src={bagIcon} alt="bag" />
-          {product.price}
+          {product.leftQuantity}/{product.quantity}
           <Image src={likeIcon} alt="like" className="pl-[2px]" />
           {/* {product.likes} api에 없음 */}3
         </div>

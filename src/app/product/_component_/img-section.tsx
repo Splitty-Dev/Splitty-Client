@@ -29,9 +29,11 @@ export default function ImgSection({
             className="snap-center flex-shrink-0 w-full h-[385px] "
           >
             <Image
-              src={url}
+              src={`https://splitty-bucket.s3.ap-northeast-2.amazonaws.com/${url}`}
               alt={productTitle}
               className="w-full h-full oject-cover "
+              width={800}
+              height={600}
             />
           </div>
         ))}
