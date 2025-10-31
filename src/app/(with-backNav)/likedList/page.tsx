@@ -42,6 +42,7 @@ export default function LikedListPage() {
             key={product.id}
             product={product}
             className={index === allProducts.length - 1 ? "mb-14" : ""}
+            isLikedList={true}
           />
         ))}
 

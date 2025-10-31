@@ -16,6 +16,10 @@ interface ProductItemProps {
   quantity: number;
   leftQuantity: number;
 }
+const statusList = {
+  CLOSED: "모집완료",
+  COMPLETED: "거래완료",
+};
 
 const IMAGE_BASE_URL =
   "https://splitty-bucket.s3.ap-northeast-2.amazonaws.com/";
@@ -23,9 +27,11 @@ const IMAGE_BASE_URL =
 export default function ProductItem({
   product,
   className = "",
+  isLikedList = false,
 }: {
   product: ProductItemProps;
   className?: string;
+  isLikedList?: boolean;
 }) {
   const imageUrl = product.imageName
     ? `${IMAGE_BASE_URL}${product.imageName}`
@@ -37,7 +43,6 @@ export default function ProductItem({
       className={`mx-4  py-4 flex gap-4 border-b border-[#F2F2F2] ${className} cursor-pointer`}
     >
       <Image
-        // src={`${IMAGE_BASE_URL}${`390c95c1-340c-4986-8f71-c7d4059a05cd.jpg`}`}
         src={imageUrl}
         alt={product.name}
         className="w-[110px] h-[110px] rounded-[4px] object-cover "
@@ -51,9 +56,9 @@ export default function ProductItem({
           <h3 className="text-[15px] font-bold">
             {product.price.toLocaleString()}원
           </h3>
-          {product.status === "COMPLETED" && (
+          {isLikedList && product.status !== "OPEN" && (
             <p className="text-[10px] py-1 px-[17.5px] rounded-[4px] bg-[#000] text-[white] font-sm w-[72px] h-[18px] flex items-center">
-              거래완료
+              {statusList[product.status]}
             </p>
           )}
         </div>
