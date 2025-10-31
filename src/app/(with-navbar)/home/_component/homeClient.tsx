@@ -32,6 +32,10 @@ export default function HomeClient() {
     enabled: !!token,
   });
 
+  useEffect(() => {
+    localStorage.setItem("myId", myInfo?.id);
+  }, [myInfo]);
+
   const [categoryId, setCategoryId] = useState(0);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useCursorProducts(categoryId);

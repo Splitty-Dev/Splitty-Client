@@ -1,8 +1,8 @@
 import sampleImg from "@/assets/imgs/sampleProduct.jpg";
 
 import Image from "next/image";
-import peopleIcon from "@/assets/icons/peopleSmallIcon.svg";
 import { formatTimeAgo } from "@/hooks/formatTImeAgo";
+import { useRouter } from "next/navigation";
 
 interface ChatListItemProps {
   name: string;
@@ -10,6 +10,7 @@ interface ChatListItemProps {
   imageName: string;
   lastMessage: string;
   updatedAt: string;
+  goodsId: number;
 }
 
 export default function ChatListItem({
@@ -19,6 +20,7 @@ export default function ChatListItem({
   chatListData: ChatListItemProps;
   className?: string;
 }) {
+  const router = useRouter();
   const IMAGE_BASE_URL =
     "https://splitty-bucket.s3.ap-northeast-2.amazonaws.com/";
 
@@ -26,9 +28,13 @@ export default function ChatListItem({
     ? `${IMAGE_BASE_URL}${chatListData.imageName}`
     : sampleImg;
 
+  const handleChat = () => {
+    router.push(`chat/${chatListData.goodsId}`);
+  };
   return (
     <div
       className={`mx-4  py-4 flex gap-4 border-b border-[#F2F2F2] ${className}`}
+      onClick={handleChat}
     >
       <Image
         src={imageUrl}

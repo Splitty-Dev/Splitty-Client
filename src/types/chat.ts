@@ -6,3 +6,17 @@ export type chatListItem = {
   currParticipants: number;
   imageName: string;
 };
+
+export type ChatUser = {
+  id: number;
+  username: string;
+  profileImageUrl: string;
+};
+
+export type ChatMessage = {
+  id: number;
+  senderId: number;
+  type: "TEXT" | "ENTER";
+  message: string;
+  createdAt: string;
+};
