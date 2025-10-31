@@ -11,9 +11,26 @@ import { useEffect, useRef, useState } from "react";
 import { productType } from "../../../types/product";
 import { useQuery } from "@tanstack/react-query";
 import { getMyInfo } from "../../api/member";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Home() {
-  const { data: myInfo } = useQuery({ queryKey: ["me"], queryFn: getMyInfo });
+  const params = useSearchParams();
+  const router = useRouter();
+  useEffect(() => {
+    const token = params.get("accessToken");
+    if (token) {
+      localStorage.setItem("accessToken", token);
+      router.replace("/home");
+    }
+  }, [params, router]);
+
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+  const { data: myInfo } = useQuery({
+    queryKey: ["me"],
+    queryFn: getMyInfo,
+    enabled: !!token,
+  });
 
   const [categoryId, setCategoryId] = useState(0);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
