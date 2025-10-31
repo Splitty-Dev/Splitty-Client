@@ -10,7 +10,7 @@ export default function LikePopBtn({ goodsId }: { goodsId: number }) {
   const queryKey = ["isWishList", goodsId];
   const queryFn = () => getIsWish(goodsId);
   const { data } = useQuery({ queryKey, queryFn });
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(data?.isInWishList);
 
   useEffect(() => {
     if (data?.isInWishList !== undefined) {
