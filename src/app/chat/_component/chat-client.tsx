@@ -122,7 +122,7 @@ export default function Chat({ goodsId }: { goodsId: number }) {
 
       {/* 메시지 영역 */}
       <div
-        className="overflow-y-auto px-4 pt-[65px] pb-[80px] h-full space-y-3"
+        className="overflow-y-auto px-4 pt-[65px] pb-[80px] h-full space-y-3 scrollbar-hide"
         ref={scrollRef}
       >
         <div ref={topObserverRef}></div>
