@@ -2,42 +2,89 @@
 import clock from "@/assets/icons/searchClock.svg";
 import close from "@/assets/icons/searchClose.svg";
 import ProductItem from "@/components/product-item";
-import { mock } from "@/mocks/mock";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-
-const recentList = ["에코 생수 500ml", "에코 생수 100ml"];
+import { getMySearchRec } from "../api/search";
+import { useSearchProducts } from "@/hooks/useSearchProducts";
+import { useEffect, useRef } from "react";
+import { productType } from "@/types/product";
+import { pages } from "next/dist/build/templates/app-page";
 
 export default function SearchPage() {
+  const queryKey = ["searchedRec"];
+  const queryFn = () => getMySearchRec();
+  const { data: searchRec } = useQuery({ queryKey, queryFn });
+  const recentList = searchRec || [];
+
   const searchParams = useSearchParams();
-  const query = searchParams.get("q");
+  const keyword = searchParams.get("q") || "";
+
+  const { data, fetchNextPage, hasNextPage } = useSearchProducts(keyword);
+
+  const observerRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (!hasNextPage) return;
+    const el = observerRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (el) observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasNextPage, fetchNextPage]);
+
   return (
     <div>
-      {!query && (
+      {!keyword && (
         <div>
-          {query}
+          {keyword}
           <div className="flex justify-between px-4 py-3">
             <h2 className="typo-b14">최근검색</h2>
             <button className="typo-r10 text-[#8C8C8C]">전체 삭제</button>
           </div>
-          <div className="flex gap-2 flex-col">
-            {recentList.map((recent, idx) => (
-              <div key={idx} className="flex px-4 gap-2 ">
-                <Image src={clock} alt="최근" width={16} height={16} />
-                <p className="flex-1 typo-r14 text-[#757575]">
-                  에코 생수 500ml
-                </p>
-                <Image src={close} alt="삭제" width={15} height={15} />
-              </div>
-            ))}
+          <div className="flex gap-2 flex-col typo-r14 text-[#757575]">
+            {recentList.length > 0 ? (
+              recentList?.map((r: { id: number; keyword: string }) => (
+                <div key={r.id} className="flex px-4 gap-2 ">
+                  <Image src={clock} alt="최근" width={16} height={16} />
+                  <p className="flex-1 ">{r.keyword}</p>
+                  <Image src={close} alt="삭제" width={15} height={15} />
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-400 px-4">최근 검색어가 없습니다.</p>
+            )}
           </div>
         </div>
       )}
-      {query && (
+      {keyword && (
         <div>
-          {mock.map((item) => (
-            <ProductItem product={item} key={item.id} />
-          ))}
+          {keyword && (
+            <div>
+              {data?.pages.map((page, pageIdx) =>
+                page?.map((product: productType) => (
+                  <ProductItem
+                    key={`${pageIdx}-${product.id}`}
+                    product={product}
+                  />
+                ))
+              )}
+              <div
+                ref={observerRef}
+                className="h-12 flex justify-center items-center"
+              ></div>
+            </div>
+          )}
+          <div
+            ref={observerRef}
+            className="h-12 flex justify-center items-center"
+          ></div>
         </div>
       )}
     </div>
