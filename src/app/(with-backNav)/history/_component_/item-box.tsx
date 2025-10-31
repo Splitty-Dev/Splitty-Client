@@ -76,7 +76,7 @@ export default function HistoryItemBox({
           router.push(`/confirm/${product?.id}`);
           break;
         case "COMPLETED":
-          router.push("/review");
+          router.push(`/review/${product?.id}`);
           break;
       }
     } else if (kind === "purchases") {
@@ -85,7 +85,7 @@ export default function HistoryItemBox({
           // mutate("나가기???");
           break;
         case "COMPLETED":
-          router.push("/review");
+          router.push(`/review/${product?.id}`);
           break;
         default:
           break;
@@ -117,7 +117,9 @@ export default function HistoryItemBox({
           <div className="flex flex-col gap-1">
             <h2 className="typo-r14">{product.name}</h2>
             <p className="typo-r12 text-[#8C8C8C]">{`${product.neighName} ・ ${currParticipants}명 참여중`}</p>
-            <h3 className="text-[15px] font-bold">{product.price}원</h3>
+            <h3 className="text-[15px] font-bold">
+              {product.price.toLocaleString()}원
+            </h3>
           </div>
           <div className="flex justify-end typo-r12 text-[#8C8C8C] items-center gap-[2px]">
             <Image src={bagIcon} alt="bag" />

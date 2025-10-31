@@ -12,6 +12,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getTradeQuantity } from "../../api/confirm";
 import { summaryProductInfo } from "@/app/api/chat";
 
+import { changeTradeStatus, confirmTradeQuantity } from "@/app/api/status";
+import { useRouter } from "next/navigation";
+
 type QuantityUser = {
   memberId: number;
   username: string;
@@ -21,10 +24,14 @@ type QuantityUser = {
 
 export default function ConfirmClient({ id }: { id: string }) {
   const goodsId = Number(id);
+  const router = useRouter();
+
   const queryKey = ["productSummary", goodsId];
   const queryFn = () => summaryProductInfo(goodsId);
   const { data: productInfo } = useQuery({ queryKey, queryFn });
-  const pricePerItem = productInfo.price;
+
+  const pricePerItem = productInfo?.price ?? 0;
+
   const { data } = useQuery({
     queryKey: ["getTradeQuantity", goodsId],
     queryFn: () => getTradeQuantity(goodsId),
@@ -44,7 +51,6 @@ export default function ConfirmClient({ id }: { id: string }) {
       )
     );
   };
-
   const handleInputChange = (index: number, newValue: string) => {
     const newQ = parseInt(newValue, 10);
     if (isNaN(newQ)) return;
@@ -55,6 +61,20 @@ export default function ConfirmClient({ id }: { id: string }) {
     );
   };
 
+  const handleConfirm = async () => {
+    try {
+      await confirmTradeQuantity(
+        goodsId,
+        users.map(({ memberId, quantity }) => ({ memberId, quantity }))
+      );
+      await changeTradeStatus(goodsId, "COMPLETED");
+      alert("수량 등록 되었습니다");
+      router.push("/history/sales");
+    } catch (err) {
+      console.error(err);
+      alert("거래 완료 중 오류가 발생했습니다.");
+    }
+  };
   return (
     <div>
       <div className="relative flex flex-col gap-4">
@@ -101,7 +121,10 @@ export default function ConfirmClient({ id }: { id: string }) {
         </div>
       </div>
       <div className="fixed bottom-0 bg-white flex  w-full typo-r12 items-center align-center px-4 pb-[29px] py-2 border-t border-[#F2F2F2] h-[80px] justify-end">
-        <button className="typo-b14 px-[14px] py-2 bg-[#4F4DF8] text-[white] rounded-[4px]">
+        <button
+          className="typo-b14 px-[14px] py-2 bg-[#4F4DF8] text-[white] rounded-[4px]"
+          onClick={handleConfirm}
+        >
           거래 및 수량 확정
         </button>
       </div>

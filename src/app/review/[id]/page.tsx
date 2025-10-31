@@ -3,7 +3,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import CloseButton from "@/components/close-button";
 import samplePrf from "@/assets/icons/samplePrf.svg";
 import Image from "next/image";
-import RatingStar from "./_component_/rating-star";
+import RatingStar from "../_component_/rating-star";
 
 const users = ["조아", "채영", "강현"];
 
