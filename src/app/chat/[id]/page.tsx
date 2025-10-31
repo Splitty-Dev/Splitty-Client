@@ -1,6 +1,10 @@
 import ChatClient from "../_component/chat-client";
 
-export default async function ChatPage({ params }: { params: { id: string } }) {
+export default async function ChatPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   const goodsId = Number(id);
 
