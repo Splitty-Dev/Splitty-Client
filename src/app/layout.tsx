@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { pretendard } from "./fonts";
 import Providers from "./providers";
+import ClientProvider from "./client-provider";
 
 export const metadata: Metadata = {
   title: "Splitty | 함께 나누는 똑똑한 소비",
@@ -26,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="ko" className={pretendard.variable}>
       <body className="pt-[var(--app-safe-top)] pb-[var(--app-safe-bottom)]">
-        <Providers>{children}</Providers>
+        <ClientProvider>
+          <Providers>{children}</Providers>
+        </ClientProvider>
       </body>
     </html>
   );
