@@ -14,6 +14,5 @@ export const getUserReviews = async ({
   revieweeId: number;
 }) => {
   const res = await apiFetch(`/review/${revieweeId}`, { method: "POST" });
-  console.log("📦 getUserReviews:", res);
   return res.data.data;
 };
