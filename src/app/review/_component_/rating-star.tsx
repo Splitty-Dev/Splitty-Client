@@ -1,12 +1,13 @@
-"use client";
-import { useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
-export default function RatingStar() {
-  const [rating, setRating] = useState(0);
+interface RatingStarProps {
+  value: number;
+  onChange: (value: number) => void;
+}
 
-  const handleClick = (value: number) => {
-    setRating(value);
+export default function RatingStar({ value, onChange }: RatingStarProps) {
+  const handleClick = (clickedValue: number) => {
+    onChange(clickedValue);
   };
 
   return (
@@ -27,9 +28,9 @@ export default function RatingStar() {
               onClick={() => handleClick(starValue)}
             />
             {/* 별 표시 */}
-            {rating >= starValue ? (
+            {value >= starValue ? (
               <FaStar className="text-[#4f4df8] text-[30px]" />
-            ) : rating >= halfValue ? (
+            ) : value >= halfValue ? (
               <FaStarHalfAlt className="text-[#4f4df8] text-[30px]" />
             ) : (
               <FaRegStar className="text-[#C8C8C8] text-[30px]" />

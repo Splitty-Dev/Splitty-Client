@@ -14,13 +14,7 @@ import { summaryProductInfo } from "@/app/api/chat";
 
 import { changeTradeStatus, confirmTradeQuantity } from "@/app/api/status";
 import { useRouter } from "next/navigation";
-
-type QuantityUser = {
-  memberId: number;
-  username: string;
-  profileImageUrl: string;
-  quantity: number;
-};
+import { QuantityUser } from "@/types/confirm-review";
 
 export default function ConfirmClient({ id }: { id: string }) {
   const goodsId = Number(id);
