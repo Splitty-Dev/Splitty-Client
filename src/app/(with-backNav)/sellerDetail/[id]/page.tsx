@@ -13,7 +13,7 @@ export default async function SellerDetailPage({
     <section className="-mx-4">
       <UserInfo memberId={parseInt(id)} />
       <div className="mx-4">
-        <ReviewList />
+        <ReviewList revieweeId={Number(id)} />
         <SalesProduct />
       </div>
     </section>

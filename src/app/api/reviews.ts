@@ -8,3 +8,12 @@ export const createReview = async (body: ReviewInput) => {
   });
   return res;
 };
+export const getUserReviews = async ({
+  revieweeId,
+}: {
+  revieweeId: number;
+}) => {
+  const res = await apiFetch(`/review/${revieweeId}`, { method: "POST" });
+  console.log("📦 getUserReviews:", res);
+  return res.data.data;
+};
