@@ -98,6 +98,9 @@ export default function HistoryItemBox({
     ? `${IMAGE_BASE_URL}${product.imageName}`
     : sampleImg;
 
+  const handleChatBtn = () => {
+    router.push(`/chat/${product.id}`);
+  };
   return (
     <div
       className={`mx-4  py-4 flex flex-col gap-4 border-b border-[#F2F2F2] ${className} cursor-pointer`}
@@ -125,7 +128,10 @@ export default function HistoryItemBox({
         </div>
       </Link>
       <div className="typo-b12 gap-2 flex">
-        <button className="bg-[#F2F2F2] w-full rounded-[4px] py-2">
+        <button
+          className="bg-[#F2F2F2] w-full rounded-[4px] py-2"
+          onClick={handleChatBtn}
+        >
           채팅보기
         </button>
 
