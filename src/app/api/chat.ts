@@ -35,7 +35,7 @@ export async function getChatMessages(
   };
 }
 
-export async function chatProductInfo(goodsId: number) {
+export async function summaryProductInfo(goodsId: number) {
   const res = await apiFetch(`/goods/${goodsId}/summary`);
   return res.data;
 }

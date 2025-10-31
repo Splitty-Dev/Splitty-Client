@@ -73,7 +73,7 @@ export default function HistoryItemBox({
           mutate("CLOSED");
           break;
         case "CLOSED":
-          router.push("/confirm");
+          router.push(`/confirm/${product?.id}`);
           break;
         case "COMPLETED":
           router.push("/review");

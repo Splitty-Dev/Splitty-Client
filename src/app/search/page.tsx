@@ -9,7 +9,6 @@ import { getMySearchRec } from "../api/search";
 import { useSearchProducts } from "@/hooks/useSearchProducts";
 import { useEffect, useRef } from "react";
 import { productType } from "@/types/product";
-import { pages } from "next/dist/build/templates/app-page";
 
 export default function SearchPage() {
   const queryKey = ["searchedRec"];

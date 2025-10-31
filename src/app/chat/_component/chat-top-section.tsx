@@ -1,4 +1,4 @@
-import { chatProductInfo } from "@/app/api/chat";
+import { summaryProductInfo } from "@/app/api/chat";
 import BackBkBtn from "@/components/back-bk-btn";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import sampleImg from "@/assets/imgs/sampleProduct.jpg";
 
 export default function ChatTopSection({ goodsId }: { goodsId: number }) {
   const queryKey = ["productSummary", goodsId];
-  const queryFn = () => chatProductInfo(goodsId);
+  const queryFn = () => summaryProductInfo(goodsId);
   const { data } = useQuery({ queryKey, queryFn });
 
   const imgUrl =
