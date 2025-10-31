@@ -20,6 +20,6 @@ export const searchProducts = async ({
   if (cursorCreatedAt) params.append("cursorCreatedAt", cursorCreatedAt);
 
   const res = await apiFetch(`/goods/search?${params.toString()}`);
-  console.log(">>>>>", res.data.data);
+
   return res.data.data;
 };

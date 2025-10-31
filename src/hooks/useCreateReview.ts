@@ -1,4 +1,4 @@
-import { createReview } from "@/app/api/confirm";
+import { createReview } from "@/app/api/reviews";
 import { ReviewInput } from "@/types/confirm-review";
 import { useMutation } from "@tanstack/react-query";
 
