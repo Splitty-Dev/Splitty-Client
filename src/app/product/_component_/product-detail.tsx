@@ -53,7 +53,7 @@ export default function ProductDetailClient({ id }: { id: number }) {
       {/* 하단 고정 바 */}
       <div className="absolute top-[47px] left-4 z-11 flex gap-4">
         {isBlank ? <BackBkBtn /> : <BackBtn />}
-        <Link href={`/`} className="flex ">
+        <Link href={`/home`} className="flex ">
           <Image
             src={isBlank ? homebk : homeWhite}
             alt="home"
