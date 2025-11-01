@@ -139,10 +139,17 @@ export default function HistoryItemBox({
 
         {btnsList[kind]?.[status] && (
           <button
-            className="bg-[#F2F2F2] w-full rounded-[4px] py-2"
+            className={`bg-[#F2F2F2] w-full rounded-[4px] py-2 ${
+              product.reviewed
+                ? "bg-[#F2F2F2] text-[#DADADA] "
+                : " bg-[#F2F2F2]"
+            } `}
             onClick={handleAction}
+            disabled={product?.reviewed}
           >
-            {btnsList[kind]?.[status]?.label}
+            {!product.reviewed
+              ? btnsList[kind]?.[status]?.label
+              : "리뷰 작성완료"}
           </button>
         )}
       </div>

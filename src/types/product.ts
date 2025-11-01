@@ -9,5 +9,6 @@ export interface productType {
   totalWishlist: number;
   imageName: string;
   sellerId: number;
+  reviewed?: boolean;
   status: "OPEN" | "CLOSED" | "COMPLETED";
 }
