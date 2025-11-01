@@ -64,3 +64,22 @@ export const getMyPurchasesList = async (
     nextCursor: res.data.nextCursor,
   };
 };
+
+export const getMemberSalesList = async ({
+  pageParam,
+}: {
+  pageParam?: { lastId: number | null; memberId: number };
+}) => {
+  const queryParams = new URLSearchParams();
+
+  if (pageParam?.lastId) queryParams.set("cursorId", String(pageParam.lastId));
+  queryParams.set("status", "OPEN");
+  const url = `/member/${pageParam?.memberId}/sales?${queryParams.toString()}`;
+  const res = await apiFetch(url);
+
+  return {
+    items: res.data.data,
+    hasNext: res.data.hasNext,
+    nextCursor: res.data.nextCursor,
+  };
+};

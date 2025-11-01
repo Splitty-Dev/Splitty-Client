@@ -14,7 +14,7 @@ export default async function SellerDetailPage({
       <UserInfo memberId={parseInt(id)} />
       <div className="mx-4">
         <ReviewList revieweeId={Number(id)} />
-        <SalesProduct />
+        <SalesProduct sellerId={Number(id)} />
       </div>
     </section>
   );

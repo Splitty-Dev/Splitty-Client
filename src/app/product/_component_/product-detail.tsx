@@ -2,15 +2,10 @@
 import Image from "next/image";
 import homeWhite from "@/assets/icons/homeWhite.svg";
 import homebk from "@/assets/icons/homebkBig.svg";
-import nextIcon from "@/assets/icons/product_next.svg";
 import personIcon from "@/assets/icons/product_person.svg";
 import locationIcon from "@/assets/icons/product_location.svg";
-
-import { sellingProducts } from "@/mocks/sampleProduct";
-
 import Link from "next/link";
 import BackBtn from "../../../components/backBtn";
-import ItemBox from "../_component_/itemBox";
 import SellerInfo from "../_component_/seller-section";
 import ImgSection from "../_component_/img-section";
 import ProductDetailBottomSection from "../_component_/bottom-section";
@@ -18,6 +13,7 @@ import { getHasJoined, getProductDetail } from "@/app/api/product";
 import { useQuery } from "@tanstack/react-query";
 import BackBkBtn from "@/components/back-bk-btn";
 import { useEffect, useState } from "react";
+import SellerSalesList from "./seller-sales-list";
 
 export default function ProductDetailClient({ id }: { id: number }) {
   const goodsId = id;
@@ -92,27 +88,7 @@ export default function ProductDetailClient({ id }: { id: number }) {
         </div>
       </section>
       {/* 판매상품 목록*/}
-      <section className="mx-4 py-4 gap-4 flex flex-col">
-        <div className="flex justify-between items-center">
-          <h3 className="typo-b14">
-            {product?.seller?.username}님의 판매 상품
-          </h3>
-          <Link href={`/sellerDetail/${product?.seller?.id}`}>
-            <Image src={nextIcon} alt="더보기" width={12} height={12} />
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 gap-4 w-full">
-          {sellingProducts.map((p) => {
-            const data = {
-              id: p.id,
-              thumbImg: p.thumbImg,
-              title: p.title,
-              price: p.price,
-            };
-            return <ItemBox p={data} key={p.id} />;
-          })}
-        </div>
-      </section>
+      <SellerSalesList sellerInfo={product?.seller} />
       <ProductDetailBottomSection
         price={product?.unitPrice}
         rest={product?.leftQuantity}
