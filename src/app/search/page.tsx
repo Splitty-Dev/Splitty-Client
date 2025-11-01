@@ -44,10 +44,10 @@ export default function SearchPage() {
         <div>
           {keyword}
           <div className="flex justify-between px-4 py-3">
-            <h2 className="typo-b14">최근검색</h2>
-            <button className="typo-r10 text-[#8C8C8C]">전체 삭제</button>
+            <h2 className="typo-b16 font-bold text-[16px]">최근검색</h2>
+            <button className="typo-r12 text-[#8C8C8C]">전체 삭제</button>
           </div>
-          <div className="flex gap-2 flex-col typo-r14 text-[#757575]">
+          <div className="flex gap-2 flex-col typo-r16 text-[#757575]">
             {recentList.length > 0 ? (
               recentList?.map((r: { id: number; keyword: string }) => (
                 <div key={r.id} className="flex px-4 gap-2 ">

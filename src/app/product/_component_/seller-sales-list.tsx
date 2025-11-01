@@ -51,12 +51,12 @@ export default function SellerSalesList({
       <div className="flex justify-between items-center">
         <h3 className="typo-b14">{sellerInfo?.username}님의 판매 상품</h3>
         <Link href={`/sellerDetail/${sellerInfo?.id}`}>
-          <Image src={nextIcon} alt="더보기" width={12} height={12} />
+          <Image src={nextIcon} alt="더보기" width={16} height={16} />
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-4 w-full">
+      <div className="gap-4 w-full">
         {data?.pages.map((page, pageIdx) => (
-          <div key={pageIdx}>
+          <div key={pageIdx} className="col-span-2 grid grid-cols-2 gap-4">
             {page.items.map(
               (product: {
                 id: number;

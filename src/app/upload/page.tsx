@@ -91,12 +91,12 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="relative pt-[27px] pb-[80px]">
+    <div className="relative pt-[47px] pb-[80px]">
       <UploadBottomSection
         price={`${oneProductPrice}원`}
         onClick={handleSubmit}
       />
-      <div className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[47px] items-center flex border-b border-[#F2F2F2] ">
+      <div className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[27px] items-center flex border-b border-[#F2F2F2] ">
         <CloseButton />
       </div>
       <section className="pl-4 py-3 px-4 flex gap-2">

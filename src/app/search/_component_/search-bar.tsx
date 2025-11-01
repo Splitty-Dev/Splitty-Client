@@ -27,7 +27,7 @@ export default function SearchBar() {
     }
   };
   return (
-    <div className="flex px-4 py-3 justify-between gap-[10px] -pt-[20px]">
+    <div className="flex px-4 py-3 justify-between gap-[10px] -pt-[20px] items-center">
       <BackBkBtn />
       <input
         placeholder={`미아동 근처에서 검색`}
