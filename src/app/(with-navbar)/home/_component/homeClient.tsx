@@ -70,7 +70,7 @@ export default function HomeClient() {
 
   return (
     <div className="flex flex-col">
-      <div className="fixed top-0 pt-[47px] w-full bg-white z-10">
+      <div className="fixed top-0 pt-[27px] w-full bg-white z-10">
         <div className="flex px-4 py-3 justify-between ">
           <div className="typo-b18 ">{myInfo?.neighName}</div>
           <div className=" h-6 flex gap-4">

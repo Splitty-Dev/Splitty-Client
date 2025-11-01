@@ -91,7 +91,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="relative pt-[47px] pb-[80px]">
+    <div className="relative pt-[27px] pb-[80px]">
       <UploadBottomSection
         price={`${oneProductPrice}원`}
         onClick={handleSubmit}

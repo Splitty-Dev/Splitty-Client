@@ -10,7 +10,7 @@ export default function WithNavbarLayout({
 }) {
   return (
     <div>
-      <div className="px-4 py-3">
+      <div className="px-4 py-3 -pt-[20px]">
         <BackBkBtn />
       </div>
       {children}

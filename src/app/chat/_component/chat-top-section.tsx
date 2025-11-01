@@ -21,7 +21,7 @@ export default function ChatTopSection({ goodsId }: { goodsId: number }) {
   } as const;
 
   return (
-    <div className="px-4 py-3 flex items-center gap-[10px] pt-[60px]">
+    <div className="px-4 py-3 flex items-center gap-[10px] pt-[30px]">
       <BackBkBtn />
       <div className="rounded-[4px] w-10 h-10 overflow-hidden">
         <Image

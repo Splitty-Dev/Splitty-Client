@@ -23,7 +23,7 @@ export default function NoticePage() {
 
   return (
     <div>
-      <div className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[47px] flex flex-col   ">
+      <div className="px-4 py-3 fixed top-0 h-[95px] w-full bg-[white] pt-[27px] flex flex-col   ">
         <CloseButton />
         <h2 className="py-[21px] border-b border-[#F2F2F2] typo-b18">
           알림내역
