@@ -12,8 +12,8 @@ import { useRouter } from "next/navigation";
 
 const btnsList = {
   sales: {
-    OPEN: { label: "모집완료" },
-    CLOSED: { label: "거래 및 수량 확정" },
+    OPEN: { label: "거래 및 수량 확정" },
+    CLOSED: { label: "거래완료" },
     COMPLETED: { label: "리뷰 작성하기" },
   },
   purchases: {
@@ -70,10 +70,11 @@ export default function HistoryItemBox({
     if (kind === "sales") {
       switch (status) {
         case "OPEN":
+          router.push(`/confirm/${product?.id}`);
           mutate("CLOSED");
           break;
         case "CLOSED":
-          router.push(`/confirm/${product?.id}`);
+          mutate("COMPLETED");
           break;
         case "COMPLETED":
           router.push(`/review/${product?.id}`);
