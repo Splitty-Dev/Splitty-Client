@@ -13,6 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCursorProducts } from "../../../../hooks/useCursorProducts";
 import CategoryBar from "../../../../components/category-bar";
 import ProductItem from "../../../../components/product-item";
+import ProductListItemSkeleton from "@/components/skeleton/product-list-skeleton";
 
 export default function HomeClient() {
   const params = useSearchParams();
@@ -27,7 +28,7 @@ export default function HomeClient() {
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
-  const { data: myInfo } = useQuery({
+  const { data: myInfo, isLoading: ismyInfoloading } = useQuery({
     queryKey: ["me"],
     queryFn: getMyInfo,
     enabled: !!token,
@@ -38,7 +39,7 @@ export default function HomeClient() {
   }, [myInfo]);
 
   const [categoryId, setCategoryId] = useState(0);
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
     useCursorProducts(categoryId);
 
   const observerRef = useRef<HTMLDivElement | null>(null);
@@ -72,7 +73,14 @@ export default function HomeClient() {
     <div className="flex flex-col">
       <div className="fixed top-0 pt-[27px] w-full bg-white z-10">
         <div className="flex px-4 py-3 justify-between ">
-          <div className="typo-b18 ">{myInfo?.neighName}</div>
+          {/* {ismyInfoloading && (
+            <div className="w-[54px] h-[28px] bg-[#F2F2F2]"></div>
+          )} */}
+          {myInfo ? (
+            <div className="typo-b18 ">{myInfo?.neighName}</div>
+          ) : (
+            <div className="w-[54px] h-[28px] bg-[#F2F2F2]"></div>
+          )}
           <div className=" h-6 flex gap-4">
             <Link href={`/search`}>
               <Image src={searchIcon} alt="search" width={24} height={24} />
@@ -91,6 +99,7 @@ export default function HomeClient() {
       </div>
 
       <div className="pt-[125px] mb-14 flex flex-col">
+        {isLoading && <ProductListItemSkeleton count={10} />}
         {data?.pages.map((page, pageIdx) => (
           <div key={pageIdx}>
             {page?.items?.map((product: productType) =>
