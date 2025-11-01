@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={pretendard.variable}>
-      <body className="pt-[var(--app-safe-top)] pb-[var(--app-safe-bottom)]">
+      <body className="pb-[var(--app-safe-bottom)] bg-white min-h-screen">
         <ClientProvider>
           <Providers>{children}</Providers>
         </ClientProvider>
