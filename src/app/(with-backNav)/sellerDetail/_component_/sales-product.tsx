@@ -1,8 +1,8 @@
 "use client";
 
-import ProductItem from "@/components/product-item";
-import { useCursorMemberSales } from "@/hooks/useCursorMemberSales";
 import { useEffect, useRef, useState } from "react";
+import { useCursorMemberSales } from "../../../../hooks/useCursorMemberSales";
+import ProductItem from "../../../../components/product-item";
 
 export default function SalesProduct({ sellerId }: { sellerId: number }) {
   const [memberId, setMemberId] = useState<number>(0);

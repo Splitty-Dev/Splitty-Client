@@ -28,9 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/(with-backNav)/history",
-    "src/app/(with-backNav)/sellerDetail",
-    "src",
-    "vite-env.d.ts"
+    "src/app/(with-backNav)/sellerDetail"
   ],
   "exclude": ["node_modules"]
 }

@@ -4,8 +4,9 @@ import nextIcon from "@/assets/icons/product_next.svg";
 import Image from "next/image";
 import ItemBox from "./itemBox";
 import Link from "next/link";
-import { useCursorMemberSales } from "@/hooks/useCursorMemberSales";
+
 import { useEffect, useRef, useState } from "react";
+import { useCursorMemberSales } from "../../../hooks/useCursorMemberSales";
 
 export default function SellerSalesList({
   sellerInfo,

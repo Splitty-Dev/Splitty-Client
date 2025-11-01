@@ -3,15 +3,16 @@ import searchIcon from "@/assets/icons/searchIcon.svg";
 import noticeIcon from "@/assets/icons/noticeIcon.svg";
 import Image from "next/image";
 
-import ProductItem from "@/components/product-item";
-import CategoryBar from "@/components/category-bar";
 import Link from "next/link";
-import { useCursorProducts } from "@/hooks/useCursorProducts";
+
 import { useEffect, useRef, useState } from "react";
 import { productType } from "../../../../types/product";
 import { useQuery } from "@tanstack/react-query";
 import { getMyInfo } from "../../../api/member";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useCursorProducts } from "../../../../hooks/useCursorProducts";
+import CategoryBar from "../../../../components/category-bar";
+import ProductItem from "../../../../components/product-item";
 
 export default function HomeClient() {
   const params = useSearchParams();

@@ -1,5 +1,5 @@
-import { HistoryListResponse, HistoryApiParams } from "@/types/history";
 import { apiFetch } from ".";
+import { HistoryApiParams, HistoryListResponse } from "../../types/history";
 
 export const getMyInfo = async () => {
   const res = await apiFetch(`/member/me`);
