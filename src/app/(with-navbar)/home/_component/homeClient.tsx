@@ -93,9 +93,14 @@ export default function HomeClient() {
       <div className="pt-[125px] mb-14 flex flex-col">
         {data?.pages.map((page, pageIdx) => (
           <div key={pageIdx}>
-            {page?.items?.map((product: productType) => (
-              <ProductItem product={product} key={`${pageIdx}-${product.id}`} />
-            ))}
+            {page?.items?.map((product: productType) =>
+              product ? (
+                <ProductItem
+                  product={product}
+                  key={`${pageIdx}-${product.id}`}
+                />
+              ) : null
+            )}
           </div>
         ))}
         {hasNextPage && <div ref={observerRef} />}
