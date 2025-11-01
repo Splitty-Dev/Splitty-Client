@@ -15,7 +15,6 @@ export const postLocation = async ({
 }) => {
   await apiFetch(`/member/me/neighborhood`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       latitude,
       longitude,
