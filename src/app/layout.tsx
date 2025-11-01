@@ -32,6 +32,8 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <meta name="theme-color" content="#ffffff" />
       </head>
       <body className="pt-[var(--app-safe-top)] pb-[var(--app-safe-bottom)] bg-white min-h-screen size-full">
         <ClientProvider>
