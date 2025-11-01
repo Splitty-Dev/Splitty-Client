@@ -136,7 +136,7 @@ export default function Chat({ goodsId }: { goodsId: number }) {
             return (
               <div
                 key={msgKey}
-                className="text-[#8C8C8C] typo-r14 flex justify-center pb-3"
+                className="text-[#8C8C8C] typo-r14 flex justify-center py-3"
               >
                 {msg.message}
               </div>

@@ -18,22 +18,22 @@ export default function ImgSection({
   };
 
   return (
-    <section className="relative">
+    <section className="relative aspect-square w-full overflow-hidden">
       <div
-        className="flex overflow-x-auto snap-mandatory snap-x scrollbar-hide w-full h-[385px] scroll-smooth gap-1"
+        className="flex overflow-x-auto snap-mandatory snap-x scrollbar-hide w-full  scroll-smooth gap-1"
         onScroll={handleScroll}
       >
         {imageUrls.map((url, idx) => (
           <div
             key={idx}
-            className="snap-center flex-shrink-0 w-full h-[385px] "
+            className="snap-center flex-shrink-0 w-full h-auto aspect-square"
           >
             <Image
               src={`https://splitty-bucket.s3.ap-northeast-2.amazonaws.com/${url}`}
               alt={productTitle}
-              className="w-full h-full oject-cover "
+              className="w-full h-full object-cover "
               width={800}
-              height={600}
+              height={800}
             />
           </div>
         ))}
