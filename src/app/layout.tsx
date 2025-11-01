@@ -26,7 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={pretendard.variable}>
-      <body className="pb-[var(--app-safe-bottom)] bg-white min-h-screen">
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+      </head>
+      <body className="pt-[var(--app-safe-top)] pb-[var(--app-safe-bottom)] bg-white min-h-screen size-full">
         <ClientProvider>
           <Providers>{children}</Providers>
         </ClientProvider>
