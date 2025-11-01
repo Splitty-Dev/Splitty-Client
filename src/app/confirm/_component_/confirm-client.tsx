@@ -76,13 +76,16 @@ export default function ConfirmClient({ id }: { id: string }) {
           <div className="absolute left-4">
             <CloseButton />
           </div>
-          <h2 className="typo-b18">거래 및 수량 확정</h2>
+          <h2 className="typo-b18">모집완료 및 수량 확정</h2>
         </div>
         <ConfirmItemBox product={productInfo} />
-        <div className="flex flex-col py-3 gap-3 px-4">
+        <div className="flex flex-col py-3 gap-2 px-4">
           {users.map((u, idx) => (
-            <div key={idx} className="flex items-center justify-between gap-6">
-              <div className="flex flex-col items-center text-[#DADADA] w-20 rounded-full text-center">
+            <div
+              key={idx}
+              className="flex items-center justify-between bg-[#F2F2F2] rounded-[10px] px-[18px] py-[14px]"
+            >
+              <div className="flex items-center text-[#DADADA] rounded-full text-center">
                 <Image
                   src={u.profileImageUrl}
                   alt={u.username}
@@ -90,24 +93,22 @@ export default function ConfirmClient({ id }: { id: string }) {
                   height={40}
                   className="object-cover rounded-full"
                 />
-                <h4 className="typo-b14">{u.username}님</h4>
+                <h4 className="typo-b14 pl-4 text-[#4F4F4F]">{u.username}님</h4>
+                <div className=" pl-2 text-[#8C8C8C] typo-r12">
+                  {(pricePerItem * u.quantity).toLocaleString()}원
+                </div>
               </div>
-
-              <div className="flex flex-1 justify-end">
-                {(pricePerItem * u.quantity).toLocaleString()}원
-              </div>
-              <div className="flex w-[120px] items-center gap-1">
+              <div className="flex w-[120px] items-center gap-1 justify-end">
                 <button onClick={() => handleChange(idx, -1)}>
-                  <Image src={minisIcon} alt="-" width={20} height={20} />
+                  <Image src={minisIcon} alt="-" width={25.54} height={25.54} />
                 </button>
                 <input
-                  className="w-10 text-center focus:outline-[#F2F2F2]"
-                  value={u.quantity}
+                  className="w-10 text-center focus:outline-[#F2F2F2] typo-r14"
+                  value={`${u.quantity}개`}
                   onChange={(e) => handleInputChange(idx, e.target.value)}
                 />
-                <span className="ml-1 text-[#757575] typo-r14">개</span>
                 <button onClick={() => handleChange(idx, +1)}>
-                  <Image src={plusIcon} alt="+" width={20} height={20} />
+                  <Image src={plusIcon} alt="+" width={25.54} height={25.54} />
                 </button>
               </div>
             </div>
