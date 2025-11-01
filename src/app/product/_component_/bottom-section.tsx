@@ -41,17 +41,19 @@ export default function ProductDetailBottomSection({
     if (isJoining) return;
     setIsJoining(true);
 
+    const joinQuantity = Math.min(quantity, rest);
+
     mutate(
-      { goodsId, quantity },
+      { goodsId, quantity: joinQuantity },
       {
         onSettled: () => {
           setShowModal(false);
           setIsJoining(false);
           setQuantity(1);
+          router.push(`/chat/${goodsId}`);
         },
       }
     );
-    router.push("/chatList");
   };
 
   const handleCancel = () => {
