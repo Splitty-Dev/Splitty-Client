@@ -41,9 +41,6 @@ export default function SalesProduct({ sellerId }: { sellerId: number }) {
   return (
     <div className="py-[14px]">
       <h2 className="typo-b12 px-4 ">판매상품</h2>
-      {/* {mock.slice(0, 3).map((m) => (
-        <ProductItem product={m} key={m.id} />
-      ))} */}
       {data?.pages.map((page, pageIdx) => (
         <div key={pageIdx}>
           {page.items.map(
@@ -62,6 +59,7 @@ export default function SalesProduct({ sellerId }: { sellerId: number }) {
               <ProductItem product={product} key={product?.id} />
             )
           )}
+          <div ref={observerRef}></div>
         </div>
       ))}
     </div>
