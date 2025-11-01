@@ -1,6 +1,8 @@
 export default function ProductItemSkeleton() {
   return (
-    <div className={`mx-4  py-4 flex gap-4 border-b border-[#F2F2F2] `}>
+    <div
+      className={`mx-4  py-4 flex gap-4 border-b border-[#F2F2F2] animate-pulse `}
+    >
       <div className="w-[110px] h-[110px] rounded-[4px] bg-[#F2F2F2]" />
       <div className="flex flex-col justify-between flex-1">
         <div className="flex flex-col gap-1">

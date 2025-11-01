@@ -28,7 +28,7 @@ export default function HomeClient() {
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
-  const { data: myInfo, isLoading: ismyInfoloading } = useQuery({
+  const { data: myInfo } = useQuery({
     queryKey: ["me"],
     queryFn: getMyInfo,
     enabled: !!token,
@@ -73,9 +73,6 @@ export default function HomeClient() {
     <div className="flex flex-col">
       <div className="fixed top-0 pt-[27px] w-full bg-white z-10">
         <div className="flex px-4 py-3 justify-between ">
-          {/* {ismyInfoloading && (
-            <div className="w-[54px] h-[28px] bg-[#F2F2F2]"></div>
-          )} */}
           {myInfo ? (
             <div className="typo-b18 ">{myInfo?.neighName}</div>
           ) : (
